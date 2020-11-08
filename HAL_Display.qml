@@ -196,12 +196,12 @@ ApplicationWindow {
             // thermostats
             ctx.fillStyle = Qt.rgba(0,0,0,1)
             ctx.strokeStyle = Qt.rgba(0,0,0,1)
-            thermo(ctx, 106, 151, bay_temp, hal_techNOk)
+            thermo(ctx, 112, 151, bay_temp, hal_techNOk)
             ctx.fillStyle = Qt.rgba(0,0,0,1)
             ctx.strokeStyle = Qt.rgba(0,0,0,1)
             thermo(ctx, 383, 249, shopB_temp, daisy_techNOk)
             thermo(ctx, 465, 196, elecRm_temp, daisy_techNOk)
-            thermo(ctx, 385, 112, confRm_temp, daisy_techNOk)
+            thermo(ctx, 386, 112, confRm_temp, daisy_techNOk)
             // special outdoor thermometer
             ctx.fillStyle = Qt.rgba(1,1,1,1)
             ctx.strokeStyle = Qt.rgba(1,1,1,1)
@@ -209,24 +209,26 @@ ApplicationWindow {
             // motion sensors
             ctx.fillStyle = Qt.rgba(0,0,0,1)
             ctx.strokeStyle = Qt.rgba(0,0,0,1)
-            motions(ctx, 190, 120, shop_motion, hal_techNOk)
-            motions(ctx, 100, 250, office_motion, hal_techNOk)
+            motions(ctx, 188, 137, shop_motion, hal_techNOk)
+            motions(ctx, 97, 246, office_motion, hal_techNOk)
             motions(ctx, 383, 157, shopB_motion, daisy_techNOk)
+            motions(ctx, 465, 235, elecRm_motion, daisy_techNOk)
+            motions(ctx, 462, 59, confRm_motion, daisy_techNOk)
             // systems
               // HAL
             ctx.fillStyle = Qt.rgba(0,0,0,1)
             ctx.strokeStyle = Qt.rgba(0,0,0,1)
             ctx.font = "30px Arial"
-            ctx.fillText("HAL", 113, 218)
-            ctx.strokeRect(106, 190, 72, 35)
+            ctx.fillText("HAL", 119, 218)
+            ctx.strokeRect(112, 190, 72, 35)
               // Daisy
             ctx.font = "26px Arial"
             ctx.fillText("Daisy", 468, 183)
             ctx.strokeRect(465, 157, 72, 35)
             // space open
             ctx.font = "36px Arial"
-            ctx.fillText("Space", 100, 50)
-            ctx.fillText(space_open, 100, 90)
+            ctx.fillText("Space", 110, 50)
+            ctx.fillText(space_open, 110, 90)
         }
     }
 }
