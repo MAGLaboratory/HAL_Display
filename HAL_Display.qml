@@ -63,11 +63,57 @@ ApplicationWindow {
         {
             ctx.strokeStyle = Qt.rgba(1,0,0,1)
         }
+        ctx.beginPath()
+        ctx.arc(x + 65, y, 6, 0, Math.PI)
+        ctx.fill()
+        ctx.lineWidth = 1
+        ctx.beginPath()
+        ctx.arc(x + 65, y, 20, Math.PI/2, Math.PI)
+        ctx.stroke()
+        ctx.beginPath()
+        ctx.arc(x + 65, y, 40, Math.PI/2, Math.PI)
+        ctx.stroke()
+        if (true)
+        {
+            var st = ctx.strokeStyle
+            var fl = ctx.fillStyle
+            var lw = ctx.lineWidth
+            ctx.strokeStyle = Qt.rgba(0.2,1,0.2,1)
+            ctx.fillStyle = Qt.rgba(0.2,1,0.2,1)
+            ctx.beginPath()
+            ctx.arc(x + 41.5, y + 21, 7, 0, 2*Math.PI)
+            ctx.fill()
+            ctx.lineWidth = 12
+            ctx.lineCap = "round"
+            ctx.beginPath()
+            ctx.path = "M" + (x+38) + "," + (y+36) + " l  -4,21"
+            ctx.stroke()
+            ctx.lineWidth = 4
+            ctx.beginPath()
+            ctx.path = "M" + (x+38) + "," + (y+32.5) + "l -10,4 l -4.5,11"
+            ctx.stroke()
+            ctx.beginPath()
+            ctx.path = "M" + (x+39) + "," + (y+32) + "l 9,13 l 9,2"
+            ctx.stroke()
+            ctx.lineWidth = 5
+            ctx.beginPath()
+            ctx.path = "M" + (x+30) + "," + (y+60) + "l -3,10 l -7,10"
+            ctx.stroke()
+            ctx.beginPath()
+            ctx.path = "M" + (x+37) + "," + (y+60) + "l 4,10, l 0,10"
+            ctx.stroke()
+            ctx.lineCap = "butt"
+            ctx.strokeStyle = st
+            ctx.fillStyle = fl
+            ctx.lineWidth = lw
+        }
+        ctx.lineWidth = 2
         ctx.strokeRect(x, y, 72, 88)
     }
 
     Canvas {
         id: synoptic
+        objectName: "synoptic"
         width: 600
         height: 400
         property int front_door: 0
@@ -215,6 +261,7 @@ ApplicationWindow {
             motions(ctx, 465, 235, elecRm_motion, daisy_techNOk)
             motions(ctx, 462, 59, confRm_motion, daisy_techNOk)
             // systems
+            ctx.lineWidth = 2
               // HAL
             ctx.fillStyle = Qt.rgba(0,0,0,1)
             ctx.strokeStyle = Qt.rgba(0,0,0,1)

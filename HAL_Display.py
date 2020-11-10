@@ -7,7 +7,7 @@ from typing import *
 
 from PySide2.QtGui import QGuiApplication
 from PySide2.QtQml import QQmlApplicationEngine
-from PySide2.QtCore import QCoreApplication, QObject, Slot
+from PySide2.QtCore import QCoreApplication, QObject, Slot, QTimer
 from PySide2 import QtCore
 
 def sigint_handler(*args):
@@ -42,5 +42,11 @@ if __name__ == "__main__":
     win = engine.rootObjects()[0]
     # workaround in windows to make the application not always be on top
     win.setProperty("visibility", "FullScreen")
+    synoptic = win.findChild(QObject, "synoptic")
+    # synoptic.setProperty("front_door", 1)
+    def openDoor():
+        synoptic.setProperty("front_door", 1)
+        synoptic.requestPaint()
+    QTimer.singleShot(5000, openDoor)
 
     sys.exit(app.exec_())
