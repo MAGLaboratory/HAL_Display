@@ -43,7 +43,7 @@ ApplicationWindow {
             ctx.fillStyle = Qt.rgba(1,0,0,1)
             temp = "XX"
         }
-        ctx.fillText("🌡️" + temp.toString().padStart(2, '0') + "°C", x + 3.5, y + 24)
+        ctx.fillText("🌡️" + temp.padStart(2, '0') + "°C", x + 3.5, y + 24)
         ctx.strokeRect(x, y, 72, 35)
 
         if (nok !== 0)
@@ -62,6 +62,12 @@ ApplicationWindow {
         if (nok !== 0)
         {
             ctx.strokeStyle = Qt.rgba(1,0,0,1)
+            ctx.fillStyle = Qt.rgba(1,0,0,1)
+        }
+        else
+        {
+            ctx.strokeStyle = Qt.rgba(0,0,0,1)
+            ctx.fillStyle = Qt.rgba(0,0,0,1)
         }
         ctx.beginPath()
         ctx.arc(x + 65, y, 6, 0, Math.PI)
@@ -73,7 +79,7 @@ ApplicationWindow {
         ctx.beginPath()
         ctx.arc(x + 65, y, 40, Math.PI/2, Math.PI)
         ctx.stroke()
-        if (true)
+        if (motion == 1)
         {
             var st = ctx.strokeStyle
             var fl = ctx.fillStyle
@@ -109,6 +115,15 @@ ApplicationWindow {
         }
         ctx.lineWidth = 2
         ctx.strokeRect(x, y, 72, 88)
+        if (nok !== 0)
+        {
+            ctx.beginPath()
+            ctx.path = "M" + x + "," + y + " l 72,88"
+            ctx.stroke()
+            ctx.beginPath()
+            ctx.path = "M" + x + "," + (y+88) + "l 72,-88"
+            ctx.stroke()
+        }
     }
 
     Canvas {
@@ -118,25 +133,45 @@ ApplicationWindow {
         height: 400
         property int front_door: 0
         property int pod_bay_door: 0
-        property int office_motion
-        property int shop_motion
-        property int confRm_motion
-        property int elecRm_motion
-        property int shopB_motion
-        property int outdoor_temp
-        property int bay_temp
-        property int confRm_temp
-        property int elecRm_temp
-        property int shopB_temp
-        property int daisy_techNOk
-        property int hal_techNOk
+        property int office_motion: 1
+        property int shop_motion: 1
+        property int confRm_motion: 1
+        property int elecRm_motion: 1
+        property int shopB_motion: 1
+        property string outdoor_temp: "5"
+        property string bay_temp: "10"
+        property string confRm_temp: "15"
+        property string elecRm_temp: "20"
+        property string shopB_temp: "25"
+        property int daisy_techNOk: 0
+        property int hal_techNOk: 0
         property string space_open: "Closed"
         onPaint: {
             var ctx = getContext("2d")
-            ctx.fillStyle = Qt.rgba(1, 1, 0.9, 1)
+            // space floor
+            if (space_open.search("Unknown") !== -1)
+            {
+                ctx.fillStyle = Qt.rgba(1, 0.9, 0.9, 1)
+            }
+            else if (space_open.search("Closed") !== -1)
+            {
+                ctx.fillStyle = Qt.rgba(0.9, 1, 0.9, 1)
+            }
+            else
+            {
+                ctx.fillStyle = Qt.rgba(1,1,1,1)
+            }
+
             ctx.fillRect(0, 0, width, height)
+            // outside alphalt
             ctx.fillStyle = Qt.rgba(0.4, 0.4, 0.4, 1)
             ctx.fillRect(0, 0, 90, height)
+            // space open
+            ctx.fillStyle = Qt.rgba(0,0,0,1)
+            ctx.font = "36px Arial"
+            ctx.fillText("Space", 110, 50)
+            ctx.fillText(space_open, 110, 90)
+
             ctx.lineWidth = 4
             ctx.strokeStyle = Qt.rgba(0, 0, 0, 1)
             // outer wall
@@ -200,7 +235,18 @@ ApplicationWindow {
             ctx.path = "M460,192 v 50"
             ctx.stroke()
             // bay door
-            if (pod_bay_door == 1)
+            if (hal_techNOk == 1)
+            {
+                ctx.strokeStyle = Qt.rgba(1, 0, 0, 1)
+                ctx.strokeRect(91, 36, 16, 172)
+                ctx.beginPath()
+                ctx.path = "M91,36 l 16,172"
+                ctx.stroke()
+                ctx.beginPath()
+                ctx.path = "M91,208 l 16,-172"
+                ctx.stroke()
+            }
+            else if (pod_bay_door == 1)
             {
                 // stroke top of the open bay door
                 ctx.strokeStyle = Qt.rgba(0.9, 0.8, 0, 1)
@@ -215,13 +261,23 @@ ApplicationWindow {
             else
             {
                 ctx.strokeStyle = Qt.rgba(0.2, 0.8, 0.2, 1)
-                ctx.lineWidth = 2
                 ctx.beginPath()
                 ctx.path = "M92,35 V 209"
                 ctx.stroke()
             }
             // front door
-            if (front_door == 1)
+            if (hal_techNOk == 1)
+            {
+                ctx.strokeStyle = Qt.rgba(1, 0, 0, 1)
+                ctx.strokeRect(33, 300, 60, 62)
+                ctx.beginPath()
+                ctx.path = "M33,300 l 60,62"
+                ctx.stroke()
+                ctx.beginPath()
+                ctx.path = "M33,362, l 60,-62"
+                ctx.stroke()
+            }
+            else if (front_door == 1)
             {
                 // front door open
                 ctx.strokeStyle = Qt.rgba(0.9, 0.8, 0, 1)
@@ -264,18 +320,47 @@ ApplicationWindow {
             ctx.lineWidth = 2
               // HAL
             ctx.fillStyle = Qt.rgba(0,0,0,1)
-            ctx.strokeStyle = Qt.rgba(0,0,0,1)
+            if (hal_techNOk == 1)
+            {
+                ctx.strokeStyle = Qt.rgba(1,0,0,1)
+            }
+            else
+            {
+                ctx.strokeStyle = Qt.rgba(0,0,0,1)
+            }
             ctx.font = "30px Arial"
             ctx.fillText("HAL", 119, 218)
             ctx.strokeRect(112, 190, 72, 35)
+            if (hal_techNOk == 1)
+            {
+                ctx.beginPath()
+                ctx.path = "M 112,190 l 72,35"
+                ctx.stroke()
+                ctx.beginPath()
+                ctx.path = "M 112,225 l 72,-35"
+                ctx.stroke()
+            }
               // Daisy
+            if (daisy_techNOk == 1)
+            {
+                ctx.strokeStyle = Qt.rgba(1,0,0,1)
+            }
+            else
+            {
+                ctx.strokeStyle = Qt.rgba(0,0,0,1)
+            }
             ctx.font = "26px Arial"
             ctx.fillText("Daisy", 468, 183)
             ctx.strokeRect(465, 157, 72, 35)
-            // space open
-            ctx.font = "36px Arial"
-            ctx.fillText("Space", 110, 50)
-            ctx.fillText(space_open, 110, 90)
+            if (daisy_techNOk == 1)
+            {
+                ctx.beginPath()
+                ctx.path = "M 465,157 l 72,35"
+                ctx.stroke()
+                ctx.beginPath()
+                ctx.path = "M465,192 l 72,-35"
+                ctx.stroke()
+            }
         }
     }
 }
