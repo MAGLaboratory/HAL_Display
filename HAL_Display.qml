@@ -1,8 +1,8 @@
 import QtQuick 2.11
 import QtQuick.Controls 2.4
 import QtQuick.Controls 1.4
-import QtQuick.Controls.Material 2.4
 import QtQuick.Layouts 1.11
+import QtQml.Models 2.4
 
 // Note that this entire qml file is more or less written for MAGLaboratory
 // this file is not written to be changed to other makerspaces -- not that
@@ -17,18 +17,14 @@ ApplicationWindow {
     visibility: "Minimized"
     title: qsTr("HAL Display")
 
-    Material.theme: Material.Light
-    Material.accent: Material.Grey
-
     Component.onCompleted:
     {
         console.debug("QML Loaded")
     }
-
     // Temperature sensor
     function thermo (ctx, x, y, temp, nok)
     {
-        ctx.font = "20px Arial"
+        ctx.font = "20px FreeSans"
         // ok font color handled by caller
         if (nok !== 0)
         {
@@ -36,7 +32,7 @@ ApplicationWindow {
             ctx.fillStyle = Qt.rgba(1,0,0,1)
             temp = "XX"
         }
-        ctx.fillText("🌡️" + temp.padStart(2, '0') + "°C", x + 3.5, y + 24)
+        ctx.fillText("🌡️" + temp + "°C", x + 3.5, y + 24)
         ctx.strokeRect(x, y, 72, 35)
 
         if (nok !== 0)
@@ -169,11 +165,11 @@ ApplicationWindow {
             onPaint: {
                 var ctx = getContext("2d")
                 // space floor
-                if (space_open.search("Open") !== -1)
+                if (space_open.search("OPEN") !== -1)
                 {
                     ctx.fillStyle = Qt.rgba(1, 1, 1, 1)
                 }
-                else if (space_open.search("Closed") !== -1)
+                else if (space_open.search("CLOSED") !== -1)
                 {
                     ctx.fillStyle = Qt.rgba(1, 1, 0.9, 1)
                 }
@@ -188,7 +184,7 @@ ApplicationWindow {
                 ctx.fillRect(0, 0, 90, height)
                 // space open
                 ctx.fillStyle = Qt.rgba(0,0,0,1)
-                ctx.font = "36px Arial"
+                ctx.font = "36px FreeSans"
                 ctx.fillText("Space", 110, 50)
                 ctx.fillText(space_open, 110, 90)
 
@@ -350,7 +346,7 @@ ApplicationWindow {
                 {
                     ctx.strokeStyle = Qt.rgba(0,0,0,1)
                 }
-                ctx.font = "30px Arial"
+                ctx.font = "30px FreeSans"
                 ctx.fillText("HAL", 119, 218)
                 ctx.strokeRect(112, 190, 72, 35)
                 if (hal_techNOk == 1)
@@ -371,7 +367,7 @@ ApplicationWindow {
                 {
                     ctx.strokeStyle = Qt.rgba(0,0,0,1)
                 }
-                ctx.font = "26px Arial"
+                ctx.font = "26px FreeSans"
                 ctx.fillText("Daisy", 468, 183)
                 ctx.strokeRect(465, 157, 72, 35)
                 if (daisy_techNOk == 1)
@@ -411,14 +407,28 @@ ApplicationWindow {
                     id: sensorTable
                     objectName: "sensorTable"
                     model: sensorTableModel
-                    width: 600
+                    anchors.left: parent.left
+                    anchors.leftMargin: 50
+                    width: 500
+                    height: parent.height
+//                    headerDelegate: Rectangle{
+//                        width: childrenRect.width
+//                        height: childrenRect.height
+//                        color: "steelblue"
+//                        Text{
+//                           text: styleData.value
+//                        }
+//                    }
+
                     TableViewColumn {
-                        role: "data"
-                        width: 300
+                        title: "Message"
+                        role: "name"
+                        width: 200
                     }
                     TableViewColumn {
-                        role: "name"
-                        width: 100
+                        title: "Data"
+                        role: "data"
+                        width: 300
                     }
                 }
             }

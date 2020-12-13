@@ -9,8 +9,6 @@ from PySide2.QtGui import QGuiApplication
 from PySide2.QtQml import QQmlApplicationEngine
 from PySide2.QtCore import QCoreApplication, QObject, Slot, QTimer, QAbstractItemModel
 from PySide2 import QtCore
-from PySide2.QtWidgets import QTreeView
-from PySide2.QtQuickControls2 import QQuickStyle
 
 
 def sigint_handler(*args):
@@ -45,7 +43,6 @@ class HAL_Display(mqtt.Client):
         checkup_freq: int       # we expect the HAL Reporter to send checkups
         checkup_buffer: int     # how many checkups to miss before bad
         daemons: List[str]      # names of the daemons we should look for
-        subtopics: List[str]
         mqtt_broker: str
         mqtt_port: int
         mqtt_timeout: int
@@ -85,7 +82,7 @@ class HAL_Display(mqtt.Client):
             self._message = message
 
         def columnCount(self):
-            return 2
+            return 1
 
         def child_count(self):
             return len(self._children)
@@ -93,6 +90,7 @@ class HAL_Display(mqtt.Client):
         def add_child(self, child):
             self._children.append(child)
             child._parent = self
+            return child
 
         def insert_child(self, position, child):
             if 0 <= position < child_count:
@@ -172,7 +170,6 @@ class HAL_Display(mqtt.Client):
 
         def data(self, index: QtCore.QModelIndex, role=QtCore.Qt.DisplayRole):
             if index.isValid():
-                print (role)
                 if role in (QtCore.Qt.DisplayRole, QtCore.Qt.EditRole):
                     node = index.internalPointer()
                     return node.name()
@@ -183,13 +180,14 @@ class HAL_Display(mqtt.Client):
         def setData(self, index, value, role=QtCore.Qt.EditRole):
             if role == (QtCore.Qt.UserRole+3):
                 node = index.internalPointer()
+                print("Current value: " + node.message() + "second value: " + value)
                 node.set_message(value)
                 self.dataChanged.emit(index, index)
                 return True
             return False
 
         def flags(self, index: QtCore.QModelIndex):
-            return QtCore.Qt.ItemIsEnabled | QtCore.Qt.ItemIsSelectable
+            return QtCore.Qt.ItemIsEnabled | QtCore.Qt.ItemIsSelectable | QtCore.Qt.ItemIsEditable
 
         def indexFromItem(self, it):
             root_index = QtCore.QModelIndex()
@@ -234,11 +232,11 @@ class HAL_Display(mqtt.Client):
                     self.insertRows(index.row(), [HAL_Display.sensorNode(d)], last)
                     it = last.find_child_by_name(d)
             self.setData(self.indexFromItem(it), value, QtCore.Qt.UserRole+3)
+            print(self._root_node)
 
         def roleNames(self):
             retval = {QtCore.Qt.DisplayRole: QtCore.QByteArray(b'name'),
                 QtCore.Qt.ItemDataRole(QtCore.Qt.UserRole+3): QtCore.QByteArray(b'data')}
-            print(retval)
             return retval
 
     # Overloaded MQTT functions (from mqtt.Client)
@@ -254,25 +252,42 @@ class HAL_Display(mqtt.Client):
 
     def on_connect(self, client, userdata, flags, rc):
         print("Connected: " + str(rc))
-        self.subscribe("reporter/checkup_req")
-        self.subscribe("reporter/bootup")
         for daemon in self.config.daemons:
-            for subtopic in self.config.subtopics:
-                print("Subscribing to: " + daemon + "/" + subtopic)
-                self.subscribe(daemon + "/" + subtopic)
+            self.subscribe(daemon + "/#")
 
     def on_message(self, client, userdata, message):
-        if not message.payload:
-            print("Topic received: " + message.topic)
-            return
-        pl = message.payload.decode("utf-8")
-        print("Topic received: " + message.topic + " :: " + pl)
-        self.data.messages[message.topic] = pl
-        path = message.topic.split('/')
-        newsensors = {}
-        sensors_json = json.loads(pl)
-        for sensor, value in sensors_json.items():
-            self.sensorTableModel.updateSensor(path[0]+'/'+sensor, str(value), '/')
+        if message.payload:
+            pl = message.payload.decode("utf-8")
+            print("Topic received: " + message.topic + " :: " + pl)
+            self.data.messages[message.topic] = pl
+            if message.topic == "tweeter/time_announce":
+                self.synoptic.setProperty("space_open", pl)
+                self.sensorTableModel.updateSensor(message.topic, pl, '/')
+            else:
+                path = message.topic.split('/')
+                sensors_json = json.loads(pl)
+                for sensor, value in sensors_json.items():
+                    self.sensorTableModel.updateSensor(path[0]+'/'+sensor, str(value), '/')
+                    if path[0] == "haldor":
+                        self.synoptic.setProperty("hal_techNOk", 0)
+                    if path[0] == "daisy":
+                        self.synoptic.setProperty("daisy_techNOk", 0)
+                    try:
+                        if self.sensorMap[sensor]:
+                            if "Motion" in sensor or "Door" in sensor:
+                                self.synoptic.setProperty(self.sensorMap[sensor], bool(value))
+                            elif "Temp" in sensor:
+                                try: 
+                                    self.synoptic.setProperty(self.sensorMap[sensor], str((int(value)+999)//1000))
+                                except:
+                                    self.synoptic.setProperty(self.sensorMap[sensor], value[:2])
+                    except KeyError:
+                        pass
+            self.synoptic.requestPaint()
+        else:
+            self.sensorTableModel.updateSensor(message.topic, str(""), '/')
+
+
 
 
     # Run function, handles everything
@@ -287,6 +302,18 @@ class HAL_Display(mqtt.Client):
 
         self.data.messages = {}
         self.data.sensors = {}
+        self.sensorMap = {"Front Door": "front_door",
+                          "Pod Bay Door": "pod_bay_door",
+                          "Office Motion": "office_motion",
+                          "Shop Motion": "shop_motion",
+                          "ConfRm Motion": "confRm_motion",
+                          "ElecRm Motion": "elecRm_motion",
+                          "ShopB Motion": "shopB_motion",
+                          "Outdoor Temp": "outdoor_temp",
+                          "Bay Temp": "bay_temp",
+                          "ConfRm Temp": "confRm_temp",
+                          "ElecRm Temp": "elecRm_temp",
+                          "ShopB Temp": "shopB_temp"}
 
         print("Config loaded:")
         print(self.config)
@@ -300,8 +327,12 @@ class HAL_Display(mqtt.Client):
         self.loop_start()
 
         self.app = QGuiApplication([])
-        QQuickStyle.setStyle("Material")
         engine = QQmlApplicationEngine()
+
+        self.sensorTableModel = HAL_Display.sensorTable()
+        self.sensorTableModel.insertRows(0,[HAL_Display.sensorNode(daemon) for daemon in self.config.daemons])
+        print(self.sensorTableModel._root_node)
+        engine.rootContext().setContextProperty("sensorTableModel", self.sensorTableModel)
         engine.load(os.path.join(os.path.dirname(__file__), "HAL_Display.qml"))
 
         if not engine.rootObjects():
@@ -311,24 +342,12 @@ class HAL_Display(mqtt.Client):
         # workaround in windows to make the application not always be on top
         win.setProperty("visibility", "FullScreen")
         self.synoptic = win.findChild(QObject, "synoptic")
+        self.sensorTable = win.findChild(QObject, "sensorTable")
         # synoptic.setProperty("front_door", 1)
-        self.sensorTableModel = HAL_Display.sensorTable()
-        self.sensorTableModel.insertRows(0,[HAL_Display.sensorNode(daemon) for daemon in self.config.daemons])
-        print(self.sensorTableModel._root_node)
-        engine.rootContext().setContextProperty("sensorTableModel", self.sensorTableModel)
-
-
-        def openDoor():
-            self.synoptic.setProperty("front_door", 1)
-            self.synoptic.setProperty("space_open", "Open")
-            self.synoptic.requestPaint()
-
-            print(self.sensorTableModel.roleNames())
-            print(QtCore.Qt.UserRole + 0)
-        QTimer.singleShot(5000, openDoor)
 
         exit_code = self.app.exec_()
         self.loop_stop()
+        print(exit_code)
         sys.exit(exit_code)
 
 

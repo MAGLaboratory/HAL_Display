@@ -3,8 +3,7 @@
 	"description": "This is the HAL Display configuration file.",
 	"checkup_freq": 300,
 	"checkup_buffer": 3,
-	"daemons": ["haldor", "daisy"],
-	"subtopics": ["bootup", "event", "checkup"],
+	"daemons": ["haldor", "daisy", "reporter", "tweeter"],
 	"mqtt_broker": "hal",
 	"mqtt_port": 1883,
 	"mqtt_timeout": 60
