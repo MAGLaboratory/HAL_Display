@@ -144,11 +144,11 @@
             // 
             this.tabStatus.Controls.Add(this.treeView1);
             this.tabStatus.ImageKey = "thermo.png";
-            this.tabStatus.Location = new System.Drawing.Point(4, 31);
+            this.tabStatus.Location = new System.Drawing.Point(4, 33);
             this.tabStatus.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.tabStatus.Name = "tabStatus";
             this.tabStatus.Padding = new System.Windows.Forms.Padding(2, 3, 2, 3);
-            this.tabStatus.Size = new System.Drawing.Size(592, 586);
+            this.tabStatus.Size = new System.Drawing.Size(592, 584);
             this.tabStatus.TabIndex = 0;
             this.tabStatus.Text = "Status";
             this.tabStatus.UseVisualStyleBackColor = true;
@@ -159,7 +159,7 @@
             this.treeView1.Location = new System.Drawing.Point(2, 3);
             this.treeView1.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.treeView1.Name = "treeView1";
-            this.treeView1.Size = new System.Drawing.Size(588, 580);
+            this.treeView1.Size = new System.Drawing.Size(588, 578);
             this.treeView1.TabIndex = 0;
             // 
             // tabFan
@@ -255,7 +255,7 @@
             this.tableLayoutPanelFanControl.SetRowSpan(this.checkBoxFanControlOnOff, 3);
             this.checkBoxFanControlOnOff.Size = new System.Drawing.Size(282, 126);
             this.checkBoxFanControlOnOff.TabIndex = 0;
-            this.checkBoxFanControlOnOff.Text = "On / Off";
+            this.checkBoxFanControlOnOff.Text = "Turn On";
             this.checkBoxFanControlOnOff.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.checkBoxFanControlOnOff.UseVisualStyleBackColor = false;
             this.checkBoxFanControlOnOff.CheckedChanged += new System.EventHandler(this.checkBoxFanControlOnOff_CheckedChanged);
@@ -597,10 +597,10 @@
             // tabOverride
             // 
             this.tabOverride.ImageKey = "manual.png";
-            this.tabOverride.Location = new System.Drawing.Point(4, 31);
+            this.tabOverride.Location = new System.Drawing.Point(4, 33);
             this.tabOverride.Name = "tabOverride";
             this.tabOverride.Padding = new System.Windows.Forms.Padding(3);
-            this.tabOverride.Size = new System.Drawing.Size(592, 586);
+            this.tabOverride.Size = new System.Drawing.Size(592, 584);
             this.tabOverride.TabIndex = 2;
             this.tabOverride.Text = "Manual Override";
             this.tabOverride.UseVisualStyleBackColor = true;
@@ -608,9 +608,9 @@
             // tabInfo
             // 
             this.tabInfo.ImageKey = "tree.png";
-            this.tabInfo.Location = new System.Drawing.Point(4, 31);
+            this.tabInfo.Location = new System.Drawing.Point(4, 33);
             this.tabInfo.Name = "tabInfo";
-            this.tabInfo.Size = new System.Drawing.Size(592, 586);
+            this.tabInfo.Size = new System.Drawing.Size(592, 584);
             this.tabInfo.TabIndex = 3;
             this.tabInfo.Text = "System";
             this.tabInfo.UseVisualStyleBackColor = true;
@@ -619,10 +619,10 @@
             // 
             this.tabLog.Controls.Add(this.diagnosticsTextBox);
             this.tabLog.ImageKey = "log.png";
-            this.tabLog.Location = new System.Drawing.Point(4, 31);
+            this.tabLog.Location = new System.Drawing.Point(4, 33);
             this.tabLog.Name = "tabLog";
             this.tabLog.Padding = new System.Windows.Forms.Padding(3);
-            this.tabLog.Size = new System.Drawing.Size(592, 586);
+            this.tabLog.Size = new System.Drawing.Size(592, 584);
             this.tabLog.TabIndex = 4;
             this.tabLog.Text = "Log";
             this.tabLog.UseVisualStyleBackColor = true;
@@ -639,13 +639,12 @@
             this.diagnosticsTextBox.Location = new System.Drawing.Point(3, 3);
             this.diagnosticsTextBox.Multiline = true;
             this.diagnosticsTextBox.Name = "diagnosticsTextBox";
-            this.diagnosticsTextBox.OutputFile = null;
-            this.diagnosticsTextBox.OutputFileBackup = null;
             this.diagnosticsTextBox.ReadOnly = true;
             this.diagnosticsTextBox.RefreshInterval = 50;
             this.diagnosticsTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.diagnosticsTextBox.Size = new System.Drawing.Size(586, 580);
+            this.diagnosticsTextBox.Size = new System.Drawing.Size(586, 578);
             this.diagnosticsTextBox.TabIndex = 0;
+            this.diagnosticsTextBox.Theme = CodeArtEng.Diagnostics.TextBoxTheme.UserDefined;
             this.diagnosticsTextBox.TimeStampFormat = "yyyy-MM-dd HH:mm:ss.fff";
             this.diagnosticsTextBox.WordWrap = false;
             // 
