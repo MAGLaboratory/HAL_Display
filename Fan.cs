@@ -11,7 +11,7 @@ using System.Windows.Forms;
 
 namespace HAL_Display
 {
-    public partial class Display: Form 
+    public partial class Display
     {
         class Fan
         {

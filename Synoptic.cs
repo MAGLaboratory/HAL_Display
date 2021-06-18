@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Drawing.Drawing2D;
 using System.Windows.Forms;
 
 namespace HAL_Display
 {
-	public partial class Display : Form
+	public partial class Display
 	{
         class SynopticData
         {
@@ -211,10 +212,24 @@ namespace HAL_Display
 
         }
 
+        private void thermo_Paint(int x, int y, Pen pen, Brush brush, Graphics g, string temp, bool techBad)
+        {
+            int width = 72;
+            int height = 35;
+            if (techBad == true || temp == "XX")
+            {
+                pen = Pens.Red;
+                brush = Brushes.Red;
+                temp = "XX";
+            }
+            g.DrawString("" + temp + "C", this.Font, brush, x + 3.5f, y + 24f);
+            g.DrawRectangle(pen, x, y, width, height);
+        }
+
         private void synopticPanel_Paint(object sender, PaintEventArgs e)
         {
             var p = sender as Panel;
-            var g = e.Graphics;
+            Graphics g = e.Graphics;
 
             // entire place
             Point[] points = new Point[4];
@@ -235,24 +250,23 @@ namespace HAL_Display
             // Pod Bay Door
             if (this.synopticData.daemon["hal"] == true)
             {
-                Pen pen = new Pen(Color.Red, 1.0f);
                 int left_corner_x = 89;
                 int left_corner_y = 35;
                 int width = 17;
                 int height = 173;
-                g.DrawRectangle(pen, left_corner_x, left_corner_y, width, height);
+                g.DrawRectangle(Pens.Red, left_corner_x, left_corner_y, width, height);
                 Point[] x1 =
                 {
                     new Point(left_corner_x, left_corner_y),
                     new Point(left_corner_x + width, left_corner_y + height)
                 };
-                g.DrawLines(pen, x1);
+                g.DrawLines(Pens.Red, x1);
                 Point[] x2 =
                 {
                     new Point(left_corner_x, left_corner_y + height),
                     new Point(left_corner_x + width, left_corner_y)
                 };
-                g.DrawLines(pen, x2);
+                g.DrawLines(Pens.Red, x2);
             }
             else if(this.synopticData.door["Pod_Bay_Door"] == true)
             {
@@ -286,25 +300,48 @@ namespace HAL_Display
             // front door
             if (this.synopticData.daemon["hal"] == true)
             {
-                Pen pen = new Pen(Color.Red, 1.0f);
                 int left_corner_x = 31;
                 int left_corner_y = 299;
                 int width = 62;
                 int height = 63;
-                g.DrawRectangle(pen, left_corner_x, left_corner_y, width, height);
+                g.DrawRectangle(Pens.Red, left_corner_x, left_corner_y, width, height);
                 Point[] x1 =
                 {
                     new Point(left_corner_x, left_corner_y),
                     new Point(left_corner_x + width, left_corner_y + height)
                 };
-                g.DrawLines(pen, x1);
+                g.DrawLines(Pens.Red, x1);
                 Point[] x2 =
                 {
                     new Point(left_corner_x, left_corner_y + height),
                     new Point(left_corner_x + width, left_corner_y)
                 };
-                g.DrawLines(pen, x2);
+                g.DrawLines(Pens.Red, x2);
             }
+            else if (this.synopticData.door["Front_Door"] == true)
+            {
+                Pen pen = new Pen(Color.Gold, 2.0f);
+                pen.SetLineCap(LineCap.Round, LineCap.Round, DashCap.Flat);
+                Point[] d1 =
+                {
+                    new Point(92, 362),
+                    new Point(92-58, 362-26)
+                };
+                g.DrawLines(pen, d1);
+            }
+            else
+            {
+                Pen pen = new Pen(Color.LimeGreen, 2.0f);
+                Point[] d1 =
+                {
+                    new Point(92, 363),
+                    new Point(92, 363-64)
+                };
+                g.DrawLines(pen, d1);
+            }
+
+            // thermostats
+            thermo_Paint(15, 16, Pens.Black, Brushes.Black, g, "15", true);
         }
     }
 }
