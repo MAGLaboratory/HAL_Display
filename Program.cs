@@ -14,6 +14,8 @@ namespace HAL_Display
         [STAThread]
         static void Main()
         {
+            Debug.Listeners.Add(new TextWriterTraceListener(Console.Out));
+            Debug.AutoFlush = true;
             Debug.WriteLine("HAL Display started.");
 
             Application.EnableVisualStyles();

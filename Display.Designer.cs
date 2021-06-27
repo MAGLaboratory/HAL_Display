@@ -135,6 +135,7 @@
             this.tabControl1.ImageList = this.imageList1;
             this.tabControl1.Location = new System.Drawing.Point(0, 0);
             this.tabControl1.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            this.tabControl1.MinimumSize = new System.Drawing.Size(600, 400);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
             this.tabControl1.Size = new System.Drawing.Size(600, 621);
@@ -143,7 +144,7 @@
             // tabStatus
             // 
             this.tabStatus.Controls.Add(this.treeView1);
-            this.tabStatus.ImageKey = "thermo.png";
+            this.tabStatus.ImageIndex = 1;
             this.tabStatus.Location = new System.Drawing.Point(4, 33);
             this.tabStatus.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.tabStatus.Name = "tabStatus";
@@ -166,7 +167,7 @@
             // 
             this.tabFan.AutoScroll = true;
             this.tabFan.Controls.Add(this.tableLayoutPanelFan);
-            this.tabFan.ImageKey = "fan2.png";
+            this.tabFan.ImageIndex = 0;
             this.tabFan.Location = new System.Drawing.Point(4, 33);
             this.tabFan.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.tabFan.Name = "tabFan";
@@ -271,6 +272,7 @@
             this.buttonFanControlReset.TabIndex = 2;
             this.buttonFanControlReset.Text = "Reset";
             this.buttonFanControlReset.UseVisualStyleBackColor = false;
+            this.buttonFanControlReset.Click += new System.EventHandler(this.buttonFanControlReset_Click);
             // 
             // groupBoxFanInfo
             // 
@@ -596,7 +598,7 @@
             // 
             // tabOverride
             // 
-            this.tabOverride.ImageKey = "manual.png";
+            this.tabOverride.ImageIndex = 4;
             this.tabOverride.Location = new System.Drawing.Point(4, 33);
             this.tabOverride.Name = "tabOverride";
             this.tabOverride.Padding = new System.Windows.Forms.Padding(3);
@@ -607,7 +609,7 @@
             // 
             // tabInfo
             // 
-            this.tabInfo.ImageKey = "tree.png";
+            this.tabInfo.ImageIndex = 2;
             this.tabInfo.Location = new System.Drawing.Point(4, 33);
             this.tabInfo.Name = "tabInfo";
             this.tabInfo.Size = new System.Drawing.Size(592, 584);
@@ -618,7 +620,7 @@
             // tabLog
             // 
             this.tabLog.Controls.Add(this.diagnosticsTextBox);
-            this.tabLog.ImageKey = "log.png";
+            this.tabLog.ImageIndex = 3;
             this.tabLog.Location = new System.Drawing.Point(4, 33);
             this.tabLog.Name = "tabLog";
             this.tabLog.Padding = new System.Windows.Forms.Padding(3);
@@ -639,12 +641,13 @@
             this.diagnosticsTextBox.Location = new System.Drawing.Point(3, 3);
             this.diagnosticsTextBox.Multiline = true;
             this.diagnosticsTextBox.Name = "diagnosticsTextBox";
+            this.diagnosticsTextBox.OutputFile = null;
+            this.diagnosticsTextBox.OutputFileBackup = null;
             this.diagnosticsTextBox.ReadOnly = true;
             this.diagnosticsTextBox.RefreshInterval = 50;
             this.diagnosticsTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.diagnosticsTextBox.Size = new System.Drawing.Size(586, 578);
             this.diagnosticsTextBox.TabIndex = 0;
-            this.diagnosticsTextBox.Theme = CodeArtEng.Diagnostics.TextBoxTheme.UserDefined;
             this.diagnosticsTextBox.TimeStampFormat = "yyyy-MM-dd HH:mm:ss.fff";
             this.diagnosticsTextBox.WordWrap = false;
             // 
@@ -652,12 +655,12 @@
             // 
             this.imageList1.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageList1.ImageStream")));
             this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
-            this.imageList1.Images.SetKeyName(0, "fan2.png");
-            this.imageList1.Images.SetKeyName(1, "thermo.png");
-            this.imageList1.Images.SetKeyName(2, "tree.png");
-            this.imageList1.Images.SetKeyName(3, "log.png");
-            this.imageList1.Images.SetKeyName(4, "manual.png");
-            this.imageList1.Images.SetKeyName(5, "fan3.png");
+            this.imageList1.Images.SetKeyName(0, "fan2.ico");
+            this.imageList1.Images.SetKeyName(1, "thermo.ico");
+            this.imageList1.Images.SetKeyName(2, "tree.ico");
+            this.imageList1.Images.SetKeyName(3, "log.ico");
+            this.imageList1.Images.SetKeyName(4, "manual.ico");
+            this.imageList1.Images.SetKeyName(5, "fan3.ico");
             // 
             // Display
             // 
@@ -708,7 +711,6 @@
         private System.Windows.Forms.TabPage tabOverride;
         public System.Windows.Forms.SplitContainer splitContainer1;
         private System.Windows.Forms.TabPage tabInfo;
-        private System.Windows.Forms.ImageList imageList1;
         private System.Windows.Forms.TabPage tabLog;
         private CodeArtEng.Diagnostics.Controls.DiagnosticsTextBox diagnosticsTextBox;
         private System.Windows.Forms.GroupBox groupBoxFanControl;
@@ -742,6 +744,7 @@
         private System.Windows.Forms.TextBox textBoxFanSpeedSelected;
         private System.Windows.Forms.Label labelFanSpeedCurrent;
         private System.Windows.Forms.TextBox textBoxFanSpeedCurrent;
+        private System.Windows.Forms.ImageList imageList1;
     }
 }
 

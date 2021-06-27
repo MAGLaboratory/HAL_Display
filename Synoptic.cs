@@ -1,4 +1,6 @@
-﻿using System;
+﻿using MQTTnet;
+using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Drawing2D;
@@ -31,7 +33,7 @@ namespace HAL_Display
                 this.daemon = new Dictionary<string, bool>
                 {
                     {"daisy", true },
-                    {"hal", true },
+                    {"haldor", true },
                     {"fan", true },
                     {"tweeter", true }
                 };
@@ -80,9 +82,90 @@ namespace HAL_Display
 
         pens Pens = new pens();
 
-        private void SynopticHandler()
+        private void SynopticHandler(MqttApplicationMessageReceivedEventArgs obj)
         {
+            if (obj.ApplicationMessage.Topic.StartsWith("tweeter/"))
+            {
+                this.synopticData.daemon["tweeter"] = false;
+                return;
+            }
 
+            if (obj.ApplicationMessage.Topic.StartsWith("haldor/"))
+            {
+                this.synopticData.daemon["haldor"] = false;
+            }
+
+            if (obj.ApplicationMessage.Topic.StartsWith("daisy/"))
+            {
+                this.synopticData.daemon["daisy"] = false;
+            }
+
+
+            dynamic received = JsonConvert.DeserializeObject(obj.ApplicationMessage.ConvertPayloadToString());
+
+            // get time
+            int dot_position = ((string)received.time).IndexOf(".");
+            int update_time = int.Parse(((string)received.time).Substring(0, dot_position));
+
+            foreach (dynamic entry in received)
+            {
+                string key = entry.Name;
+                string value = entry.Value;
+
+                key = key.Replace(' ', '_');
+
+                if (key.EndsWith("_Temp") && this.synopticData.therm.ContainsKey(key))
+                {
+                    if (value.Length > 2)
+                    {
+                        int temp = int.Parse(value);
+                        temp = (temp + 500) / 1000;
+                        this.synopticData.therm[key] = temp.ToString();
+                    }
+                    else
+                    {
+                        this.synopticData.therm[key] = value;
+                    }
+                }
+
+                if (key.EndsWith("_Door") && this.synopticData.door.ContainsKey(key))
+                {
+                    int parsed_value;
+                    if (value.ToLower() == "true")
+                    {
+                        parsed_value = 1;
+                    }
+                    else if (value.ToLower() == "false")
+                    {
+                        parsed_value = 0;
+                    }
+                    else
+                    {
+                        parsed_value = int.Parse(value);
+                    }
+                    this.synopticData.door[key] = Convert.ToBoolean(parsed_value);
+                }
+
+                if (key.EndsWith("_Motion") && this.synopticData.motion.ContainsKey(key))
+                {
+                    int parsed_value;
+                    if (value.ToLower() == "true")
+                    {
+                        parsed_value = 1;
+                    }
+                    else if (value.ToLower() == "false")
+                    {
+                        parsed_value = 0;
+                    }
+                    else
+                    {
+                        parsed_value = int.Parse(value);
+                    }
+                    this.synopticData.door[key] = Convert.ToBoolean(parsed_value);
+                }
+            }
+
+            this.synopticPanel.Invoke(new MethodInvoker (delegate { this.synopticPanel.Refresh(); }));
         }
 
         void draw_walls(Graphics g)
@@ -379,9 +462,9 @@ namespace HAL_Display
             StringFormat format = new StringFormat();
             format.LineAlignment = StringAlignment.Center;
             format.Alignment = StringAlignment.Center;
-            if (this.synopticData.daemon["hal"])
+            if (this.synopticData.daemon["haldor"])
             {
-                g.DrawString("Hal", font, Brushes.Red, x + (width / 2), y + (height / 2), format);
+                g.DrawString("Haldor", font, Brushes.Red, x + (width / 2), y + (height / 2), format);
                 g.DrawRectangle(this.Pens.InOp, x, y, width, height);
                 Point[] x1 =
                 {
@@ -398,7 +481,7 @@ namespace HAL_Display
             }
             else
             {
-                g.DrawString("Hal", font, Brushes.Black, x + (width / 2), y + (height / 2), format);
+                g.DrawString("Haldor", font, Brushes.Black, x + (width / 2), y + (height / 2), format);
                 g.DrawRectangle(this.Pens.SensorBorder, x, y, width, height);
 
             }
@@ -451,7 +534,7 @@ namespace HAL_Display
             draw_inert_doors(g);
 
             // Pod Bay Door
-            if (this.synopticData.daemon["hal"] == true)
+            if (this.synopticData.daemon["haldor"] == true)
             {
                 int left_corner_x = 91;
                 int left_corner_y = 36;
@@ -500,7 +583,7 @@ namespace HAL_Display
             }
 
             // front door
-            if (this.synopticData.daemon["hal"] == true)
+            if (this.synopticData.daemon["haldor"] == true)
             {
                 int left_corner_x = 33;
                 int left_corner_y = 300;
@@ -542,15 +625,15 @@ namespace HAL_Display
             }
 
             // thermostats
-            thermo_Paint(15, 16, this.Pens.OutdoorBorder, Brushes.White, g, this.synopticData.therm["Outdoor_Temp"], this.synopticData.daemon["hal"]);
-            thermo_Paint(112, 151, this.Pens.SensorBorder, Brushes.Black, g, this.synopticData.therm["Bay_Temp"], this.synopticData.daemon["hal"]);
+            thermo_Paint(15, 16, this.Pens.OutdoorBorder, Brushes.White, g, this.synopticData.therm["Outdoor_Temp"], this.synopticData.daemon["haldor"]);
+            thermo_Paint(112, 151, this.Pens.SensorBorder, Brushes.Black, g, this.synopticData.therm["Bay_Temp"], this.synopticData.daemon["haldor"]);
             thermo_Paint(383, 249, this.Pens.SensorBorder, Brushes.Black, g, this.synopticData.therm["ShopB_Temp"], this.synopticData.daemon["daisy"]);
             thermo_Paint(465, 196, this.Pens.SensorBorder, Brushes.Black, g, this.synopticData.therm["ElecRm_Temp"], this.synopticData.daemon["daisy"]);
             thermo_Paint(386, 112, this.Pens.SensorBorder, Brushes.Black, g, this.synopticData.therm["ConfRm_Temp"], this.synopticData.daemon["daisy"]);
 
             // motion
-            motion_Paint(188, 137, g, this.synopticData.motion["Shop_Motion"], this.synopticData.daemon["hal"]);
-            motion_Paint(97, 246, g, this.synopticData.motion["Office_Motion"], this.synopticData.daemon["hal"]);
+            motion_Paint(188, 137, g, this.synopticData.motion["Shop_Motion"], this.synopticData.daemon["haldor"]);
+            motion_Paint(97, 246, g, this.synopticData.motion["Office_Motion"], this.synopticData.daemon["haldor"]);
             motion_Paint(383, 157, g, this.synopticData.motion["ShopB_Motion"], this.synopticData.daemon["daisy"]);
             motion_Paint(465, 235, g, this.synopticData.motion["ElecRm_Motion"], this.synopticData.daemon["daisy"]);
             motion_Paint(462, 59, g, this.synopticData.motion["ConfRm_Motion"], this.synopticData.daemon["daisy"]);

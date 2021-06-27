@@ -40,7 +40,9 @@ namespace HAL_Display
 
         public Display()
         {
+            Debug.WriteLine("Initializing Display.");
             InitializeComponent();
+            Debug.WriteLine("Starting MQTT.");
             mqttEn();
             fan = new Fan();
             this.fan.boxes.Add("Motor_Power", this.textBoxFanInfoMotorPower);
@@ -55,6 +57,7 @@ namespace HAL_Display
             // even though it is set to allow word wrap through the designer,
             // you have to set it again???
             diagnosticsTextBox.WordWrap = true;
+            diagnosticsTextBox.ListenerEnabled = true;
         }
 
         private async void mqttEn()
@@ -122,6 +125,19 @@ namespace HAL_Display
             if (obj.ApplicationMessage.Topic.StartsWith("fan/"))
             {
                 FanHandler(obj);
+                SynopticHandler(obj);
+            }
+            if (obj.ApplicationMessage.Topic.StartsWith("tweeter/"))
+            {
+                SynopticHandler(obj);
+            }
+            if (obj.ApplicationMessage.Topic.StartsWith("haldor/"))
+            {
+                SynopticHandler(obj);
+            }
+            if (obj.ApplicationMessage.Topic.StartsWith("daisy/"))
+            {
+                SynopticHandler(obj);
             }
             string item = $">> Msg: {(Int32)(DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1))).TotalSeconds} | {obj.ApplicationMessage.Topic} | {obj.ApplicationMessage.QualityOfServiceLevel} | {obj.ApplicationMessage.ConvertPayloadToString()}";
             Debug.WriteLine(item);
@@ -147,6 +163,8 @@ namespace HAL_Display
             if (e.KeyData == Keys.Enter && tabControl1.SelectedTab == this.tabFan)
             {
                 // tab processing 
+                // This is here in case the fan speed textbox is changed and not the trackbar
+                // TODO
             }
         }
 
@@ -192,6 +210,15 @@ namespace HAL_Display
                 .Build();
             await this.mqttClient.PublishAsync(message);
             Debug.WriteLine(">> Fan Speed Application: " + this.textBoxFanSpeedSelected.Text + "0");
+        }
+
+        private async void buttonFanControlReset_Click(object sender, EventArgs e)
+        {
+            var message = new MqttApplicationMessageBuilder()
+                .WithTopic("display/drive_reset")
+                .Build();
+            await this.mqttClient.PublishAsync(message);
+            Debug.WriteLine(">> Fan Trip Reset.");
         }
     }
 }

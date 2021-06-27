@@ -70,17 +70,17 @@ namespace HAL_Display
             }
         }
 
-        private void FanHandler(MqttApplicationMessageReceivedEventArgs obj)
+        private async void FanHandler(MqttApplicationMessageReceivedEventArgs obj)
         {
             dynamic received = JsonConvert.DeserializeObject(obj.ApplicationMessage.ConvertPayloadToString());
+
+            // get time
             int dot_position = ((string)received.time).IndexOf(".");
             int update_time = int.Parse(((string)received.time).Substring(0, dot_position));
             foreach (dynamic entry in received)
             {
                 string key = entry.Name;
                 string value = entry.Value;
-
-                // determine if it's an integer target
 
                 // TODO: error handling
                 if (this.fan.checkup.ContainsKey(key) && this.fan.checkup[key].str == null)
@@ -116,6 +116,7 @@ namespace HAL_Display
                                 v -= this.trackBarFanSpeed.Maximum / 2;
                                 int target = v * 2;
                                 v += parsed_value / 20;
+                                // change values if necessary
                                 if (v <= parsed_value / 10)
                                 {
                                     this.trackBarFanSpeed.Maximum = parsed_value / 10;
@@ -152,6 +153,7 @@ namespace HAL_Display
                             int len = value.Length;
                             if (len < 2)
                             {
+                                // handle as 0.0 and not .0
                                 this.textBoxFanSpeedCurrent.Text = value.Insert(len - 1, "0" + CultureInfo.CurrentCulture.NumberFormat.NumberDecimalSeparator);
                             }
                             else
@@ -177,13 +179,20 @@ namespace HAL_Display
                     {
                         if (parsed_value == 1)
                         {
-                            this.buttonFanControlReset.Invoke(new MethodInvoker(delegate { this.buttonFanControlReset.BackColor = Color.LightCoral; }));
-                            this.buttonFanControlReset.Enabled = true;
+                            this.buttonFanControlReset.Invoke(new MethodInvoker(delegate
+                            { 
+                                this.buttonFanControlReset.BackColor = Color.LightCoral;
+                                this.buttonFanControlReset.Enabled = true;
+                            }));
+                            
                         }
                         else
                         {
-                            this.buttonFanControlReset.Invoke(new MethodInvoker(delegate { this.buttonFanControlReset.BackColor = Color.Transparent; }));
-                            this.buttonFanControlReset.Enabled = false;
+                            this.buttonFanControlReset.Invoke(new MethodInvoker(delegate 
+                            { 
+                                this.buttonFanControlReset.BackColor = Color.Transparent;
+                                this.buttonFanControlReset.Enabled = false;
+                            }));
                         }
                     }
 
@@ -198,14 +207,15 @@ namespace HAL_Display
                                     this.checkBoxFanControlOnOff.Text = "Turn Off";
                                 }
 
-                                if (this.tabFan.ImageKey != "fan3.png")
-                                {
-                                    this.tabFan.ImageKey = "fan3.png";
-                                }
-                                else
-                                {
-                                    this.tabFan.ImageKey = "fan2.png";
-                                }
+                                // tab image animation disabled
+                                //if (this.tabFan.ImageIndex != 5)
+                                //{
+                                //    this.tabFan.ImageIndex = 5;
+                                //}
+                                //else
+                                //{
+                                //    this.tabFan.ImageIndex = 0;
+                                //}
                             }));
                         }
                         else
