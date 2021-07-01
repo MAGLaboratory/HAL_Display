@@ -17,6 +17,7 @@ namespace HAL_Display
             public Dictionary<string, bool> daemon;
             public Dictionary<string, bool> door;
             public Dictionary<string, bool> motion;
+            public string Space_Message;
             public bool Space_Open;
 
             public SynopticData()
@@ -53,6 +54,7 @@ namespace HAL_Display
                     {"ConfRm_Motion", false }
                 };
 
+                this.Space_Message = "is UNKNOWN";
                 this.Space_Open = false;
             }
         }
@@ -84,9 +86,11 @@ namespace HAL_Display
 
         private void SynopticHandler(MqttApplicationMessageReceivedEventArgs obj)
         {
+            bool updated = false;
             if (obj.ApplicationMessage.Topic.StartsWith("tweeter/"))
             {
                 this.synopticData.daemon["tweeter"] = false;
+                this.synopticData.Space_Message = obj.ApplicationMessage.ConvertPayloadToString();
                 return;
             }
 
@@ -101,7 +105,15 @@ namespace HAL_Display
             }
 
 
-            dynamic received = JsonConvert.DeserializeObject(obj.ApplicationMessage.ConvertPayloadToString());
+            dynamic received;
+            try
+            {
+                received = JsonConvert.DeserializeObject(obj.ApplicationMessage.ConvertPayloadToString());
+            }
+            catch
+            {
+                return;
+            }
 
             // get time
             int dot_position = ((string)received.time).IndexOf(".");
@@ -116,15 +128,21 @@ namespace HAL_Display
 
                 if (key.EndsWith("_Temp") && this.synopticData.therm.ContainsKey(key))
                 {
+                    string s = "";
                     if (value.Length > 2)
                     {
                         int temp = int.Parse(value);
                         temp = (temp + 500) / 1000;
-                        this.synopticData.therm[key] = temp.ToString();
+                        s = temp.ToString();
                     }
                     else
                     {
-                        this.synopticData.therm[key] = value;
+                        s = value;
+                    }
+                    if (this.synopticData.therm[key] != s)
+                    {
+                        this.synopticData.therm[key] = s;
+                        updated = true;
                     }
                 }
 
@@ -143,7 +161,14 @@ namespace HAL_Display
                     {
                         parsed_value = int.Parse(value);
                     }
-                    this.synopticData.door[key] = Convert.ToBoolean(parsed_value);
+
+                    bool bv = Convert.ToBoolean(parsed_value);
+
+                    if (this.synopticData.door[key] != bv)
+                    {
+                        this.synopticData.door[key] = bv;
+                        updated = true;
+                    }
                 }
 
                 if (key.EndsWith("_Motion") && this.synopticData.motion.ContainsKey(key))
@@ -161,11 +186,21 @@ namespace HAL_Display
                     {
                         parsed_value = int.Parse(value);
                     }
-                    this.synopticData.door[key] = Convert.ToBoolean(parsed_value);
+
+                    bool bv = Convert.ToBoolean(parsed_value);
+
+                    if (this.synopticData.motion[key] != bv)
+                    {
+                        this.synopticData.motion[key] = Convert.ToBoolean(parsed_value);
+                        updated = true;
+                    }
                 }
             }
 
-            this.synopticPanel.Invoke(new MethodInvoker (delegate { this.synopticPanel.Refresh(); }));
+            if (updated)
+            {
+                this.synopticPanel.Invoke(new MethodInvoker(delegate { this.synopticPanel.Refresh(); }));
+            }
         }
 
         void draw_walls(Graphics g)
@@ -532,6 +567,21 @@ namespace HAL_Display
             
             draw_walls(g);
             draw_inert_doors(g);
+
+            Font font = new Font(this.Font.Name, 24);
+            StringFormat format = new StringFormat();
+            format.LineAlignment = StringAlignment.Near;
+            format.Alignment = StringAlignment.Far;
+            // Space Status
+            if (this.synopticData.daemon["haldor"] == true)
+            {
+                // write the message
+                g.DrawString("The Space\n" + "is UNKNOWN", font, Brushes.Red, 360, 18, format);
+            }
+            else
+            {
+                g.DrawString("The Space\n" + this.synopticData.Space_Message, font, Brushes.Black, 360, 18, format);
+            }
 
             // Pod Bay Door
             if (this.synopticData.daemon["haldor"] == true)

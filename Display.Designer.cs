@@ -72,6 +72,8 @@
             this.tabLog = new System.Windows.Forms.TabPage();
             this.diagnosticsTextBox = new CodeArtEng.Diagnostics.Controls.DiagnosticsTextBox();
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
+            this.labelFanControlActivity = new System.Windows.Forms.Label();
+            this.pictureBoxFanControlActivity = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -88,6 +90,7 @@
             this.tableLayoutPanelFanSpeed.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarFanSpeed)).BeginInit();
             this.tabLog.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxFanControlActivity)).BeginInit();
             this.SuspendLayout();
             // 
             // splitContainer1
@@ -206,13 +209,16 @@
             // 
             // tableLayoutPanelFanControl
             // 
-            this.tableLayoutPanelFanControl.ColumnCount = 2;
+            this.tableLayoutPanelFanControl.ColumnCount = 3;
             this.tableLayoutPanelFanControl.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanelFanControl.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanelFanControl.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tableLayoutPanelFanControl.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
             this.tableLayoutPanelFanControl.Controls.Add(this.labelFanControlFault, 1, 0);
             this.tableLayoutPanelFanControl.Controls.Add(this.textBoxFanControlFault, 1, 1);
             this.tableLayoutPanelFanControl.Controls.Add(this.checkBoxFanControlOnOff, 0, 0);
             this.tableLayoutPanelFanControl.Controls.Add(this.buttonFanControlReset, 1, 2);
+            this.tableLayoutPanelFanControl.Controls.Add(this.labelFanControlActivity, 2, 0);
+            this.tableLayoutPanelFanControl.Controls.Add(this.pictureBoxFanControlActivity, 2, 1);
             this.tableLayoutPanelFanControl.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanelFanControl.Location = new System.Drawing.Point(3, 25);
             this.tableLayoutPanelFanControl.Name = "tableLayoutPanelFanControl";
@@ -230,7 +236,7 @@
             this.labelFanControlFault.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelFanControlFault.Location = new System.Drawing.Point(291, 0);
             this.labelFanControlFault.Name = "labelFanControlFault";
-            this.labelFanControlFault.Size = new System.Drawing.Size(282, 33);
+            this.labelFanControlFault.Size = new System.Drawing.Size(138, 33);
             this.labelFanControlFault.TabIndex = 0;
             this.labelFanControlFault.Text = "Fault";
             this.labelFanControlFault.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -240,7 +246,7 @@
             this.textBoxFanControlFault.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.textBoxFanControlFault.Location = new System.Drawing.Point(291, 43);
             this.textBoxFanControlFault.Name = "textBoxFanControlFault";
-            this.textBoxFanControlFault.Size = new System.Drawing.Size(282, 29);
+            this.textBoxFanControlFault.Size = new System.Drawing.Size(138, 29);
             this.textBoxFanControlFault.TabIndex = 1;
             this.textBoxFanControlFault.Text = "N/A";
             this.textBoxFanControlFault.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
@@ -264,6 +270,7 @@
             // buttonFanControlReset
             // 
             this.buttonFanControlReset.BackColor = System.Drawing.Color.Transparent;
+            this.tableLayoutPanelFanControl.SetColumnSpan(this.buttonFanControlReset, 2);
             this.buttonFanControlReset.Dock = System.Windows.Forms.DockStyle.Fill;
             this.buttonFanControlReset.Enabled = false;
             this.buttonFanControlReset.Location = new System.Drawing.Point(291, 85);
@@ -662,6 +669,27 @@
             this.imageList1.Images.SetKeyName(4, "manual.ico");
             this.imageList1.Images.SetKeyName(5, "fan3.ico");
             // 
+            // labelFanControlActivity
+            // 
+            this.labelFanControlActivity.AutoSize = true;
+            this.labelFanControlActivity.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.labelFanControlActivity.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F);
+            this.labelFanControlActivity.Location = new System.Drawing.Point(435, 0);
+            this.labelFanControlActivity.Name = "labelFanControlActivity";
+            this.labelFanControlActivity.Size = new System.Drawing.Size(138, 33);
+            this.labelFanControlActivity.TabIndex = 3;
+            this.labelFanControlActivity.Text = "Activity";
+            this.labelFanControlActivity.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // pictureBoxFanControlActivity
+            // 
+            this.pictureBoxFanControlActivity.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pictureBoxFanControlActivity.Location = new System.Drawing.Point(435, 36);
+            this.pictureBoxFanControlActivity.Name = "pictureBoxFanControlActivity";
+            this.pictureBoxFanControlActivity.Size = new System.Drawing.Size(138, 43);
+            this.pictureBoxFanControlActivity.TabIndex = 4;
+            this.pictureBoxFanControlActivity.TabStop = false;
+            // 
             // Display
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -677,6 +705,7 @@
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
             this.Text = "HAL Display";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Display_FormClosing);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.display_KeyDown);
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel2.ResumeLayout(false);
@@ -698,6 +727,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.trackBarFanSpeed)).EndInit();
             this.tabLog.ResumeLayout(false);
             this.tabLog.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxFanControlActivity)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -745,6 +775,8 @@
         private System.Windows.Forms.Label labelFanSpeedCurrent;
         private System.Windows.Forms.TextBox textBoxFanSpeedCurrent;
         private System.Windows.Forms.ImageList imageList1;
+        private System.Windows.Forms.Label labelFanControlActivity;
+        private System.Windows.Forms.PictureBox pictureBoxFanControlActivity;
     }
 }
 

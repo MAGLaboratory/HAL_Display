@@ -1,7 +1,9 @@
 ﻿using MQTTnet;
+using MQTTnet.Extensions.ManagedClient;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Drawing;
 using System.Globalization;
 using System.Linq;
@@ -70,7 +72,7 @@ namespace HAL_Display
             }
         }
 
-        private async void FanHandler(MqttApplicationMessageReceivedEventArgs obj)
+        private void FanHandler(MqttApplicationMessageReceivedEventArgs obj)
         {
             dynamic received = JsonConvert.DeserializeObject(obj.ApplicationMessage.ConvertPayloadToString());
 
@@ -140,6 +142,16 @@ namespace HAL_Display
 
                     if (key == "Set_Point")
                     {
+                        if (this.textBoxFanSpeedSet.Text == "N/A")
+                        {
+                            this.trackBarFanSpeed.Invoke(new MethodInvoker(delegate
+                            {
+                                int v = parsed_value / 20;
+                                v += (trackBarFanSpeed.Maximum) / 2;
+                                this.trackBarFanSpeed.Value = v;
+                            }));
+                        }
+
                         this.textBoxFanSpeedSelected.Invoke(new MethodInvoker(delegate
                         {
                             this.textBoxFanSpeedSet.Text = (parsed_value / 10).ToString();
@@ -242,6 +254,59 @@ namespace HAL_Display
                 }
                 this.fan.last[key] = value;
             }
+        }
+
+        private void trackBarFanSpeed_ValueChanged(object sender, EventArgs e)
+        {
+            // update the text box if the trackbar changed value
+            int v = trackBarFanSpeed.Value;
+            v -= (trackBarFanSpeed.Maximum) / 2;
+            v *= 2;
+            textBoxFanSpeedSelected.Text = v.ToString();
+            this.fan.new_speed = v * 10;
+        }
+
+        private async void checkBoxFanControlOnOff_CheckedChanged(object sender, EventArgs e)
+        {
+            if (checkBoxFanControlOnOff.Checked)
+            {
+                checkBoxFanControlOnOff.Text = "Turning On";
+                var message = new MqttApplicationMessageBuilder()
+                    .WithTopic("display/drive_run")
+                    .WithPayload("true")
+                    .Build();
+                await this.mqttClient.PublishAsync(message);
+                Debug.WriteLine(">> Turning fan on");
+            }
+            else
+            {
+                checkBoxFanControlOnOff.Text = "Turning Off";
+                var message = new MqttApplicationMessageBuilder()
+                    .WithTopic("display/drive_run")
+                    .WithPayload("false")
+                    .Build();
+                await this.mqttClient.PublishAsync(message);
+                Debug.WriteLine(">> Turning fan off");
+            }
+        }
+
+        private async void buttonFanSpeedApply_Click(object sender, EventArgs e)
+        {
+            var message = new MqttApplicationMessageBuilder()
+                .WithTopic("display/drive_speed")
+                .WithPayload(this.textBoxFanSpeedSelected.Text + "0")
+                .Build();
+            await this.mqttClient.PublishAsync(message);
+            Debug.WriteLine(">> Fan Speed Application: " + this.textBoxFanSpeedSelected.Text + "0");
+        }
+
+        private async void buttonFanControlReset_Click(object sender, EventArgs e)
+        {
+            var message = new MqttApplicationMessageBuilder()
+                .WithTopic("display/drive_reset")
+                .Build();
+            await this.mqttClient.PublishAsync(message);
+            Debug.WriteLine(">> Fan Trip Reset.");
         }
     }
 }

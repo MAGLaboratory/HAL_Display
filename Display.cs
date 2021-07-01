@@ -42,6 +42,23 @@ namespace HAL_Display
         {
             Debug.WriteLine("Initializing Display.");
             InitializeComponent();
+            // even though it is set to allow word wrap through the designer,
+            // you have to set it again???
+            diagnosticsTextBox.WordWrap = true;
+            diagnosticsTextBox.ListenerEnabled = true;
+            // double buffer the panel
+            typeof(Panel).InvokeMember
+            (
+                "DoubleBuffered",
+                (
+                    BindingFlags.SetProperty | 
+                    BindingFlags.Instance | 
+                    BindingFlags.NonPublic
+                ), 
+                null, 
+                synopticPanel, 
+                new object[] { true }
+            );
             Debug.WriteLine("Starting MQTT.");
             mqttEn();
             fan = new Fan();
@@ -54,10 +71,6 @@ namespace HAL_Display
             this.fan.boxes.Add("Drive_Error", this.textBoxFanControlFault);
 
             synopticData = new SynopticData();
-            // even though it is set to allow word wrap through the designer,
-            // you have to set it again???
-            diagnosticsTextBox.WordWrap = true;
-            diagnosticsTextBox.ListenerEnabled = true;
         }
 
         private async void mqttEn()
@@ -168,57 +181,11 @@ namespace HAL_Display
             }
         }
 
-        private void trackBarFanSpeed_ValueChanged(object sender, EventArgs e)
+        // stop the MQTT client when the display closes
+        private async void Display_FormClosing(object sender, FormClosingEventArgs e)
         {
-            // update the text box if the trackbar changed value
-            int v = trackBarFanSpeed.Value;
-            v -= (trackBarFanSpeed.Maximum) / 2;
-            v *= 2;
-            textBoxFanSpeedSelected.Text = v.ToString();
-            this.fan.new_speed = v * 10;
-        }
-
-        private async void checkBoxFanControlOnOff_CheckedChanged(object sender, EventArgs e)
-        {
-            if (checkBoxFanControlOnOff.Checked)
-            {
-                checkBoxFanControlOnOff.Text = "Turning On";
-                var message = new MqttApplicationMessageBuilder()
-                    .WithTopic("display/drive_run")
-                    .WithPayload("true")
-                    .Build();
-                await this.mqttClient.PublishAsync(message);
-                Debug.WriteLine(">> Turning fan on");
-            }
-            else
-            {
-                checkBoxFanControlOnOff.Text = "Turning Off";
-                var message = new MqttApplicationMessageBuilder()
-                    .WithTopic("display/drive_run")
-                    .WithPayload("false")
-                    .Build();
-                await this.mqttClient.PublishAsync(message);
-                Debug.WriteLine(">> Turning fan off");
-            }
-        }
-
-        private async void buttonFanSpeedApply_Click(object sender, EventArgs e)
-        {
-            var message = new MqttApplicationMessageBuilder()
-                .WithTopic("display/drive_speed")
-                .WithPayload(this.textBoxFanSpeedSelected.Text + "0")
-                .Build();
-            await this.mqttClient.PublishAsync(message);
-            Debug.WriteLine(">> Fan Speed Application: " + this.textBoxFanSpeedSelected.Text + "0");
-        }
-
-        private async void buttonFanControlReset_Click(object sender, EventArgs e)
-        {
-            var message = new MqttApplicationMessageBuilder()
-                .WithTopic("display/drive_reset")
-                .Build();
-            await this.mqttClient.PublishAsync(message);
-            Debug.WriteLine(">> Fan Trip Reset.");
+            await this.mqttClient.StopAsync();
+            this.mqttClient = null;
         }
     }
 }
