@@ -59,6 +59,12 @@ namespace HAL_Display
                 synopticPanel, 
                 new object[] { true }
             );
+            // show all tabs to preload contents
+            tabLog.Show();
+            tabInfo.Show();
+            tabOverride.Show();
+            tabFan.Show();
+            tabStatus.Show();
             Debug.WriteLine("Starting MQTT.");
             mqttEn();
             fan = new Fan();
@@ -152,8 +158,13 @@ namespace HAL_Display
             {
                 SynopticHandler(obj);
             }
-            string item = $">> Msg: {(Int32)(DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1))).TotalSeconds} | {obj.ApplicationMessage.Topic} | {obj.ApplicationMessage.QualityOfServiceLevel} | {obj.ApplicationMessage.ConvertPayloadToString()}";
-            Debug.WriteLine(item);
+
+            // the running message for the fan is omitted because there are too many
+            if (obj.ApplicationMessage.Topic != "fan/running")
+            {
+                string item = $">> Msg: {(Int32)(DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1))).TotalSeconds} | {obj.ApplicationMessage.Topic} | {obj.ApplicationMessage.QualityOfServiceLevel} | {obj.ApplicationMessage.ConvertPayloadToString()}";
+                Debug.WriteLine(item);
+            }
 
         }
 
