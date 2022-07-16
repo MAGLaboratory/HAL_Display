@@ -64,6 +64,8 @@ namespace HAL_Display
             tabInfo.Show();
             tabOverride.Show();
             tabFan.Show();
+            tabPageFanControlAdvanced.Show();
+            tabPageFanControlBasic.Show();
             tabStatus.Show();
             Debug.WriteLine("Starting MQTT.");
             mqttEn();
@@ -108,13 +110,22 @@ namespace HAL_Display
             // Write all trace messages to the console window.
             logger.LogMessagePublished += (s, e) =>
             {
-                // skip info messages
+                // skip below info messages
                 if (e.LogMessage.Level < MqttNetLogLevel.Info)
                 {
                     return;
                 }
 
-                var trace = $">> [{e.LogMessage.Timestamp:O}] [{e.LogMessage.ThreadId}] [{e.LogMessage.Source}] [{e.LogMessage.Level}]: {e.LogMessage.Message}";
+                string trace;
+
+                if (e.LogMessage.Level > MqttNetLogLevel.Info)
+                {
+                    trace = $"!! [{e.LogMessage.Timestamp:O}] [{e.LogMessage.ThreadId}] [{e.LogMessage.Source}] [{e.LogMessage.Level}]: {e.LogMessage.Message}";
+                }
+                else
+                {
+                    trace = $">> [{e.LogMessage.Timestamp:O}] [{e.LogMessage.ThreadId}] [{e.LogMessage.Source}] [{e.LogMessage.Level}]: {e.LogMessage.Message}";
+                }
                 if (false && e.LogMessage.Exception != null)
                 {
                     trace += Environment.NewLine + e.LogMessage.Exception.ToString();

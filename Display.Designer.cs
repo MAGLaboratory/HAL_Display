@@ -37,14 +37,6 @@
             this.treeView1 = new System.Windows.Forms.TreeView();
             this.tabFan = new System.Windows.Forms.TabPage();
             this.tableLayoutPanelFan = new System.Windows.Forms.TableLayoutPanel();
-            this.groupBoxFanControl = new System.Windows.Forms.GroupBox();
-            this.tableLayoutPanelFanControl = new System.Windows.Forms.TableLayoutPanel();
-            this.labelFanControlFault = new System.Windows.Forms.Label();
-            this.textBoxFanControlFault = new System.Windows.Forms.TextBox();
-            this.checkBoxFanControlOnOff = new System.Windows.Forms.CheckBox();
-            this.buttonFanControlReset = new System.Windows.Forms.Button();
-            this.labelFanControlActivity = new System.Windows.Forms.Label();
-            this.pictureBoxFanControlActivity = new System.Windows.Forms.PictureBox();
             this.groupBoxFanInfo = new System.Windows.Forms.GroupBox();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.labelFanInfoMotorPower = new System.Windows.Forms.Label();
@@ -59,6 +51,31 @@
             this.textBoxFanInfoDCBusV = new System.Windows.Forms.TextBox();
             this.textBoxFanInfoHSTemp = new System.Windows.Forms.TextBox();
             this.textBoxFanInfoInternalTemp = new System.Windows.Forms.TextBox();
+            this.tabControlFan = new System.Windows.Forms.TabControl();
+            this.tabPageFanControlBasic = new System.Windows.Forms.TabPage();
+            this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
+            this.groupFanBasicSpeed = new System.Windows.Forms.GroupBox();
+            this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
+            this.radioButtonFanBasicSpeedTurbo = new System.Windows.Forms.RadioButton();
+            this.radioButtonFanBasicSpeedHigh = new System.Windows.Forms.RadioButton();
+            this.radioButtonFanBasicSpeed2 = new System.Windows.Forms.RadioButton();
+            this.radioButtonFanBasicSpeed1 = new System.Windows.Forms.RadioButton();
+            this.radioButtonFanBasicSpeedLow = new System.Windows.Forms.RadioButton();
+            this.radioButtonFanBasicSpeedOff = new System.Windows.Forms.RadioButton();
+            this.groupFanBasicDirection = new System.Windows.Forms.GroupBox();
+            this.tableLayoutPanelFanBasicDirection = new System.Windows.Forms.TableLayoutPanel();
+            this.radioButtonFanBasicDirectionReverse = new System.Windows.Forms.RadioButton();
+            this.radioButtonFanBasicDirectionForward = new System.Windows.Forms.RadioButton();
+            this.tabPageFanControlAdvanced = new System.Windows.Forms.TabPage();
+            this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
+            this.groupBoxFanControl = new System.Windows.Forms.GroupBox();
+            this.tableLayoutPanelFanControl = new System.Windows.Forms.TableLayoutPanel();
+            this.labelFanControlFault = new System.Windows.Forms.Label();
+            this.textBoxFanControlFault = new System.Windows.Forms.TextBox();
+            this.checkBoxFanControlOnOff = new System.Windows.Forms.CheckBox();
+            this.buttonFanControlReset = new System.Windows.Forms.Button();
+            this.labelFanControlActivity = new System.Windows.Forms.Label();
+            this.pictureBoxFanControlActivity = new System.Windows.Forms.PictureBox();
             this.groupBoxFanSpeed = new System.Windows.Forms.GroupBox();
             this.tableLayoutPanelFanSpeed = new System.Windows.Forms.TableLayoutPanel();
             this.labelFanSpeedSet = new System.Windows.Forms.Label();
@@ -69,6 +86,10 @@
             this.buttonFanSpeedApply = new System.Windows.Forms.Button();
             this.labelFanSpeedCurrent = new System.Windows.Forms.Label();
             this.textBoxFanSpeedCurrent = new System.Windows.Forms.TextBox();
+            this.buttonFanSpeedDecPlus = new System.Windows.Forms.Button();
+            this.buttonFanSpeedDec = new System.Windows.Forms.Button();
+            this.buttonFanSpeedInc = new System.Windows.Forms.Button();
+            this.buttonFanSpeecIncPlus = new System.Windows.Forms.Button();
             this.tabOverride = new System.Windows.Forms.TabPage();
             this.tabInfo = new System.Windows.Forms.TabPage();
             this.tabLog = new System.Windows.Forms.TabPage();
@@ -82,11 +103,20 @@
             this.tabStatus.SuspendLayout();
             this.tabFan.SuspendLayout();
             this.tableLayoutPanelFan.SuspendLayout();
+            this.groupBoxFanInfo.SuspendLayout();
+            this.tableLayoutPanel1.SuspendLayout();
+            this.tabControlFan.SuspendLayout();
+            this.tabPageFanControlBasic.SuspendLayout();
+            this.tableLayoutPanel3.SuspendLayout();
+            this.groupFanBasicSpeed.SuspendLayout();
+            this.tableLayoutPanel4.SuspendLayout();
+            this.groupFanBasicDirection.SuspendLayout();
+            this.tableLayoutPanelFanBasicDirection.SuspendLayout();
+            this.tabPageFanControlAdvanced.SuspendLayout();
+            this.tableLayoutPanel2.SuspendLayout();
             this.groupBoxFanControl.SuspendLayout();
             this.tableLayoutPanelFanControl.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxFanControlActivity)).BeginInit();
-            this.groupBoxFanInfo.SuspendLayout();
-            this.tableLayoutPanel1.SuspendLayout();
             this.groupBoxFanSpeed.SuspendLayout();
             this.tableLayoutPanelFanSpeed.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarFanSpeed)).BeginInit();
@@ -184,123 +214,17 @@
             // 
             this.tableLayoutPanelFan.ColumnCount = 1;
             this.tableLayoutPanelFan.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanelFan.Controls.Add(this.groupBoxFanControl, 0, 2);
             this.tableLayoutPanelFan.Controls.Add(this.groupBoxFanInfo, 0, 0);
-            this.tableLayoutPanelFan.Controls.Add(this.groupBoxFanSpeed, 0, 1);
+            this.tableLayoutPanelFan.Controls.Add(this.tabControlFan, 0, 1);
             this.tableLayoutPanelFan.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanelFan.Location = new System.Drawing.Point(2, 3);
             this.tableLayoutPanelFan.Name = "tableLayoutPanelFan";
             this.tableLayoutPanelFan.RowCount = 3;
-            this.tableLayoutPanelFan.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
-            this.tableLayoutPanelFan.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+            this.tableLayoutPanelFan.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 30.62284F));
+            this.tableLayoutPanelFan.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 35.81315F));
             this.tableLayoutPanelFan.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
             this.tableLayoutPanelFan.Size = new System.Drawing.Size(588, 578);
             this.tableLayoutPanelFan.TabIndex = 8;
-            // 
-            // groupBoxFanControl
-            // 
-            this.groupBoxFanControl.Controls.Add(this.tableLayoutPanelFanControl);
-            this.groupBoxFanControl.Location = new System.Drawing.Point(3, 387);
-            this.groupBoxFanControl.Name = "groupBoxFanControl";
-            this.groupBoxFanControl.Size = new System.Drawing.Size(582, 160);
-            this.groupBoxFanControl.TabIndex = 7;
-            this.groupBoxFanControl.TabStop = false;
-            this.groupBoxFanControl.Text = "Fan Control";
-            // 
-            // tableLayoutPanelFanControl
-            // 
-            this.tableLayoutPanelFanControl.ColumnCount = 3;
-            this.tableLayoutPanelFanControl.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanelFanControl.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.tableLayoutPanelFanControl.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.tableLayoutPanelFanControl.Controls.Add(this.labelFanControlFault, 1, 0);
-            this.tableLayoutPanelFanControl.Controls.Add(this.textBoxFanControlFault, 1, 1);
-            this.tableLayoutPanelFanControl.Controls.Add(this.checkBoxFanControlOnOff, 0, 0);
-            this.tableLayoutPanelFanControl.Controls.Add(this.buttonFanControlReset, 1, 2);
-            this.tableLayoutPanelFanControl.Controls.Add(this.labelFanControlActivity, 2, 0);
-            this.tableLayoutPanelFanControl.Controls.Add(this.pictureBoxFanControlActivity, 2, 1);
-            this.tableLayoutPanelFanControl.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanelFanControl.Location = new System.Drawing.Point(3, 25);
-            this.tableLayoutPanelFanControl.Name = "tableLayoutPanelFanControl";
-            this.tableLayoutPanelFanControl.RowCount = 3;
-            this.tableLayoutPanelFanControl.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.tableLayoutPanelFanControl.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 37.5F));
-            this.tableLayoutPanelFanControl.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 37.5F));
-            this.tableLayoutPanelFanControl.Size = new System.Drawing.Size(576, 132);
-            this.tableLayoutPanelFanControl.TabIndex = 1;
-            // 
-            // labelFanControlFault
-            // 
-            this.labelFanControlFault.AutoSize = true;
-            this.labelFanControlFault.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.labelFanControlFault.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelFanControlFault.Location = new System.Drawing.Point(291, 0);
-            this.labelFanControlFault.Name = "labelFanControlFault";
-            this.labelFanControlFault.Size = new System.Drawing.Size(138, 33);
-            this.labelFanControlFault.TabIndex = 0;
-            this.labelFanControlFault.Text = "Fault";
-            this.labelFanControlFault.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // textBoxFanControlFault
-            // 
-            this.textBoxFanControlFault.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBoxFanControlFault.Location = new System.Drawing.Point(291, 43);
-            this.textBoxFanControlFault.Name = "textBoxFanControlFault";
-            this.textBoxFanControlFault.Size = new System.Drawing.Size(138, 29);
-            this.textBoxFanControlFault.TabIndex = 1;
-            this.textBoxFanControlFault.Text = "N/A";
-            this.textBoxFanControlFault.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
-            // checkBoxFanControlOnOff
-            // 
-            this.checkBoxFanControlOnOff.Appearance = System.Windows.Forms.Appearance.Button;
-            this.checkBoxFanControlOnOff.AutoSize = true;
-            this.checkBoxFanControlOnOff.BackColor = System.Drawing.Color.Transparent;
-            this.checkBoxFanControlOnOff.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.checkBoxFanControlOnOff.Location = new System.Drawing.Point(3, 3);
-            this.checkBoxFanControlOnOff.Name = "checkBoxFanControlOnOff";
-            this.tableLayoutPanelFanControl.SetRowSpan(this.checkBoxFanControlOnOff, 3);
-            this.checkBoxFanControlOnOff.Size = new System.Drawing.Size(282, 126);
-            this.checkBoxFanControlOnOff.TabIndex = 0;
-            this.checkBoxFanControlOnOff.Text = "Turn On";
-            this.checkBoxFanControlOnOff.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.checkBoxFanControlOnOff.UseVisualStyleBackColor = false;
-            this.checkBoxFanControlOnOff.CheckedChanged += new System.EventHandler(this.checkBoxFanControlOnOff_CheckedChanged);
-            // 
-            // buttonFanControlReset
-            // 
-            this.buttonFanControlReset.BackColor = System.Drawing.Color.Transparent;
-            this.tableLayoutPanelFanControl.SetColumnSpan(this.buttonFanControlReset, 2);
-            this.buttonFanControlReset.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.buttonFanControlReset.Enabled = false;
-            this.buttonFanControlReset.Location = new System.Drawing.Point(291, 85);
-            this.buttonFanControlReset.Name = "buttonFanControlReset";
-            this.buttonFanControlReset.Size = new System.Drawing.Size(282, 44);
-            this.buttonFanControlReset.TabIndex = 2;
-            this.buttonFanControlReset.Text = "Reset";
-            this.buttonFanControlReset.UseVisualStyleBackColor = false;
-            this.buttonFanControlReset.Click += new System.EventHandler(this.buttonFanControlReset_Click);
-            // 
-            // labelFanControlActivity
-            // 
-            this.labelFanControlActivity.AutoSize = true;
-            this.labelFanControlActivity.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.labelFanControlActivity.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F);
-            this.labelFanControlActivity.Location = new System.Drawing.Point(435, 0);
-            this.labelFanControlActivity.Name = "labelFanControlActivity";
-            this.labelFanControlActivity.Size = new System.Drawing.Size(138, 33);
-            this.labelFanControlActivity.TabIndex = 3;
-            this.labelFanControlActivity.Text = "Activity";
-            this.labelFanControlActivity.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // pictureBoxFanControlActivity
-            // 
-            this.pictureBoxFanControlActivity.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pictureBoxFanControlActivity.Location = new System.Drawing.Point(435, 36);
-            this.pictureBoxFanControlActivity.Name = "pictureBoxFanControlActivity";
-            this.pictureBoxFanControlActivity.Size = new System.Drawing.Size(138, 43);
-            this.pictureBoxFanControlActivity.TabIndex = 4;
-            this.pictureBoxFanControlActivity.TabStop = false;
             // 
             // groupBoxFanInfo
             // 
@@ -485,13 +409,349 @@
             this.textBoxFanInfoInternalTemp.Text = "N/A";
             this.textBoxFanInfoInternalTemp.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
+            // tabControlFan
+            // 
+            this.tabControlFan.Controls.Add(this.tabPageFanControlBasic);
+            this.tabControlFan.Controls.Add(this.tabPageFanControlAdvanced);
+            this.tabControlFan.Location = new System.Drawing.Point(2, 180);
+            this.tabControlFan.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            this.tabControlFan.Name = "tabControlFan";
+            this.tabControlFan.Padding = new System.Drawing.Point(3, 3);
+            this.tableLayoutPanelFan.SetRowSpan(this.tabControlFan, 2);
+            this.tabControlFan.SelectedIndex = 0;
+            this.tabControlFan.Size = new System.Drawing.Size(584, 395);
+            this.tabControlFan.TabIndex = 9;
+            // 
+            // tabPageFanControlBasic
+            // 
+            this.tabPageFanControlBasic.Controls.Add(this.tableLayoutPanel3);
+            this.tabPageFanControlBasic.Location = new System.Drawing.Point(4, 33);
+            this.tabPageFanControlBasic.Name = "tabPageFanControlBasic";
+            this.tabPageFanControlBasic.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPageFanControlBasic.Size = new System.Drawing.Size(576, 358);
+            this.tabPageFanControlBasic.TabIndex = 1;
+            this.tabPageFanControlBasic.Text = "Basic";
+            this.tabPageFanControlBasic.UseVisualStyleBackColor = true;
+            // 
+            // tableLayoutPanel3
+            // 
+            this.tableLayoutPanel3.ColumnCount = 1;
+            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel3.Controls.Add(this.groupFanBasicSpeed, 0, 0);
+            this.tableLayoutPanel3.Controls.Add(this.groupFanBasicDirection, 0, 1);
+            this.tableLayoutPanel3.Location = new System.Drawing.Point(3, 3);
+            this.tableLayoutPanel3.Name = "tableLayoutPanel3";
+            this.tableLayoutPanel3.RowCount = 2;
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 37.21591F));
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 62.78409F));
+            this.tableLayoutPanel3.Size = new System.Drawing.Size(570, 352);
+            this.tableLayoutPanel3.TabIndex = 0;
+            // 
+            // groupFanBasicSpeed
+            // 
+            this.groupFanBasicSpeed.Controls.Add(this.tableLayoutPanel4);
+            this.groupFanBasicSpeed.Location = new System.Drawing.Point(3, 3);
+            this.groupFanBasicSpeed.Name = "groupFanBasicSpeed";
+            this.groupFanBasicSpeed.Size = new System.Drawing.Size(564, 97);
+            this.groupFanBasicSpeed.TabIndex = 0;
+            this.groupFanBasicSpeed.TabStop = false;
+            this.groupFanBasicSpeed.Text = "Fan Speed";
+            // 
+            // tableLayoutPanel4
+            // 
+            this.tableLayoutPanel4.ColumnCount = 6;
+            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
+            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
+            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
+            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
+            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
+            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
+            this.tableLayoutPanel4.Controls.Add(this.radioButtonFanBasicSpeedTurbo, 5, 0);
+            this.tableLayoutPanel4.Controls.Add(this.radioButtonFanBasicSpeedHigh, 4, 0);
+            this.tableLayoutPanel4.Controls.Add(this.radioButtonFanBasicSpeed2, 3, 0);
+            this.tableLayoutPanel4.Controls.Add(this.radioButtonFanBasicSpeed1, 2, 0);
+            this.tableLayoutPanel4.Controls.Add(this.radioButtonFanBasicSpeedLow, 1, 0);
+            this.tableLayoutPanel4.Controls.Add(this.radioButtonFanBasicSpeedOff, 0, 0);
+            this.tableLayoutPanel4.Location = new System.Drawing.Point(0, 28);
+            this.tableLayoutPanel4.Name = "tableLayoutPanel4";
+            this.tableLayoutPanel4.RowCount = 1;
+            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel4.Size = new System.Drawing.Size(564, 61);
+            this.tableLayoutPanel4.TabIndex = 0;
+            // 
+            // radioButtonFanBasicSpeedTurbo
+            // 
+            this.radioButtonFanBasicSpeedTurbo.Appearance = System.Windows.Forms.Appearance.Button;
+            this.radioButtonFanBasicSpeedTurbo.AutoSize = true;
+            this.radioButtonFanBasicSpeedTurbo.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.radioButtonFanBasicSpeedTurbo.Location = new System.Drawing.Point(468, 3);
+            this.radioButtonFanBasicSpeedTurbo.Name = "radioButtonFanBasicSpeedTurbo";
+            this.radioButtonFanBasicSpeedTurbo.Size = new System.Drawing.Size(93, 55);
+            this.radioButtonFanBasicSpeedTurbo.TabIndex = 5;
+            this.radioButtonFanBasicSpeedTurbo.Text = "Turbo";
+            this.radioButtonFanBasicSpeedTurbo.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.radioButtonFanBasicSpeedTurbo.UseVisualStyleBackColor = true;
+            this.radioButtonFanBasicSpeedTurbo.Click += new System.EventHandler(this.radioButtonFanBasicSpeed_Click);
+            // 
+            // radioButtonFanBasicSpeedHigh
+            // 
+            this.radioButtonFanBasicSpeedHigh.Appearance = System.Windows.Forms.Appearance.Button;
+            this.radioButtonFanBasicSpeedHigh.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.radioButtonFanBasicSpeedHigh.Location = new System.Drawing.Point(375, 3);
+            this.radioButtonFanBasicSpeedHigh.Name = "radioButtonFanBasicSpeedHigh";
+            this.radioButtonFanBasicSpeedHigh.Size = new System.Drawing.Size(87, 55);
+            this.radioButtonFanBasicSpeedHigh.TabIndex = 4;
+            this.radioButtonFanBasicSpeedHigh.Text = "High";
+            this.radioButtonFanBasicSpeedHigh.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.radioButtonFanBasicSpeedHigh.UseVisualStyleBackColor = true;
+            this.radioButtonFanBasicSpeedHigh.Click += new System.EventHandler(this.radioButtonFanBasicSpeed_Click);
+            // 
+            // radioButtonFanBasicSpeed2
+            // 
+            this.radioButtonFanBasicSpeed2.Appearance = System.Windows.Forms.Appearance.Button;
+            this.radioButtonFanBasicSpeed2.AutoSize = true;
+            this.radioButtonFanBasicSpeed2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.radioButtonFanBasicSpeed2.Location = new System.Drawing.Point(282, 3);
+            this.radioButtonFanBasicSpeed2.Name = "radioButtonFanBasicSpeed2";
+            this.radioButtonFanBasicSpeed2.Size = new System.Drawing.Size(87, 55);
+            this.radioButtonFanBasicSpeed2.TabIndex = 3;
+            this.radioButtonFanBasicSpeed2.Text = "••";
+            this.radioButtonFanBasicSpeed2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.radioButtonFanBasicSpeed2.UseVisualStyleBackColor = true;
+            this.radioButtonFanBasicSpeed2.Click += new System.EventHandler(this.radioButtonFanBasicSpeed_Click);
+            // 
+            // radioButtonFanBasicSpeed1
+            // 
+            this.radioButtonFanBasicSpeed1.Appearance = System.Windows.Forms.Appearance.Button;
+            this.radioButtonFanBasicSpeed1.AutoSize = true;
+            this.radioButtonFanBasicSpeed1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.radioButtonFanBasicSpeed1.Location = new System.Drawing.Point(189, 3);
+            this.radioButtonFanBasicSpeed1.Name = "radioButtonFanBasicSpeed1";
+            this.radioButtonFanBasicSpeed1.Size = new System.Drawing.Size(87, 55);
+            this.radioButtonFanBasicSpeed1.TabIndex = 2;
+            this.radioButtonFanBasicSpeed1.Text = "•";
+            this.radioButtonFanBasicSpeed1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.radioButtonFanBasicSpeed1.UseVisualStyleBackColor = true;
+            this.radioButtonFanBasicSpeed1.Click += new System.EventHandler(this.radioButtonFanBasicSpeed_Click);
+            // 
+            // radioButtonFanBasicSpeedLow
+            // 
+            this.radioButtonFanBasicSpeedLow.Appearance = System.Windows.Forms.Appearance.Button;
+            this.radioButtonFanBasicSpeedLow.AutoSize = true;
+            this.radioButtonFanBasicSpeedLow.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.radioButtonFanBasicSpeedLow.Location = new System.Drawing.Point(96, 3);
+            this.radioButtonFanBasicSpeedLow.Name = "radioButtonFanBasicSpeedLow";
+            this.radioButtonFanBasicSpeedLow.Size = new System.Drawing.Size(87, 55);
+            this.radioButtonFanBasicSpeedLow.TabIndex = 1;
+            this.radioButtonFanBasicSpeedLow.Text = "Low";
+            this.radioButtonFanBasicSpeedLow.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.radioButtonFanBasicSpeedLow.UseVisualStyleBackColor = true;
+            this.radioButtonFanBasicSpeedLow.Click += new System.EventHandler(this.radioButtonFanBasicSpeed_Click);
+            // 
+            // radioButtonFanBasicSpeedOff
+            // 
+            this.radioButtonFanBasicSpeedOff.Appearance = System.Windows.Forms.Appearance.Button;
+            this.radioButtonFanBasicSpeedOff.AutoSize = true;
+            this.radioButtonFanBasicSpeedOff.Checked = true;
+            this.radioButtonFanBasicSpeedOff.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.radioButtonFanBasicSpeedOff.Location = new System.Drawing.Point(3, 3);
+            this.radioButtonFanBasicSpeedOff.Name = "radioButtonFanBasicSpeedOff";
+            this.radioButtonFanBasicSpeedOff.Size = new System.Drawing.Size(87, 55);
+            this.radioButtonFanBasicSpeedOff.TabIndex = 0;
+            this.radioButtonFanBasicSpeedOff.TabStop = true;
+            this.radioButtonFanBasicSpeedOff.Text = "Off";
+            this.radioButtonFanBasicSpeedOff.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.radioButtonFanBasicSpeedOff.UseVisualStyleBackColor = true;
+            this.radioButtonFanBasicSpeedOff.Click += new System.EventHandler(this.radioButtonFanBasicSpeed_Click);
+            // 
+            // groupFanBasicDirection
+            // 
+            this.groupFanBasicDirection.Controls.Add(this.tableLayoutPanelFanBasicDirection);
+            this.groupFanBasicDirection.Location = new System.Drawing.Point(3, 134);
+            this.groupFanBasicDirection.Name = "groupFanBasicDirection";
+            this.groupFanBasicDirection.Size = new System.Drawing.Size(564, 151);
+            this.groupFanBasicDirection.TabIndex = 1;
+            this.groupFanBasicDirection.TabStop = false;
+            this.groupFanBasicDirection.Text = "Fan Direction";
+            // 
+            // tableLayoutPanelFanBasicDirection
+            // 
+            this.tableLayoutPanelFanBasicDirection.ColumnCount = 2;
+            this.tableLayoutPanelFanBasicDirection.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanelFanBasicDirection.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanelFanBasicDirection.Controls.Add(this.radioButtonFanBasicDirectionReverse, 1, 0);
+            this.tableLayoutPanelFanBasicDirection.Controls.Add(this.radioButtonFanBasicDirectionForward, 0, 0);
+            this.tableLayoutPanelFanBasicDirection.Location = new System.Drawing.Point(0, 28);
+            this.tableLayoutPanelFanBasicDirection.Name = "tableLayoutPanelFanBasicDirection";
+            this.tableLayoutPanelFanBasicDirection.RowCount = 1;
+            this.tableLayoutPanelFanBasicDirection.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanelFanBasicDirection.Size = new System.Drawing.Size(561, 115);
+            this.tableLayoutPanelFanBasicDirection.TabIndex = 0;
+            // 
+            // radioButtonFanBasicDirectionReverse
+            // 
+            this.radioButtonFanBasicDirectionReverse.Appearance = System.Windows.Forms.Appearance.Button;
+            this.radioButtonFanBasicDirectionReverse.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.radioButtonFanBasicDirectionReverse.Location = new System.Drawing.Point(283, 3);
+            this.radioButtonFanBasicDirectionReverse.Name = "radioButtonFanBasicDirectionReverse";
+            this.radioButtonFanBasicDirectionReverse.Size = new System.Drawing.Size(275, 109);
+            this.radioButtonFanBasicDirectionReverse.TabIndex = 1;
+            this.radioButtonFanBasicDirectionReverse.Text = "Reverse\r\n(Air In)";
+            this.radioButtonFanBasicDirectionReverse.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.radioButtonFanBasicDirectionReverse.UseVisualStyleBackColor = true;
+            // 
+            // radioButtonFanBasicDirectionForward
+            // 
+            this.radioButtonFanBasicDirectionForward.Appearance = System.Windows.Forms.Appearance.Button;
+            this.radioButtonFanBasicDirectionForward.Checked = true;
+            this.radioButtonFanBasicDirectionForward.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.radioButtonFanBasicDirectionForward.Location = new System.Drawing.Point(3, 3);
+            this.radioButtonFanBasicDirectionForward.Name = "radioButtonFanBasicDirectionForward";
+            this.radioButtonFanBasicDirectionForward.Size = new System.Drawing.Size(274, 109);
+            this.radioButtonFanBasicDirectionForward.TabIndex = 0;
+            this.radioButtonFanBasicDirectionForward.TabStop = true;
+            this.radioButtonFanBasicDirectionForward.Text = "Forward\r\n(Air Out)";
+            this.radioButtonFanBasicDirectionForward.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.radioButtonFanBasicDirectionForward.UseVisualStyleBackColor = true;
+            // 
+            // tabPageFanControlAdvanced
+            // 
+            this.tabPageFanControlAdvanced.Controls.Add(this.tableLayoutPanel2);
+            this.tabPageFanControlAdvanced.Location = new System.Drawing.Point(4, 29);
+            this.tabPageFanControlAdvanced.Name = "tabPageFanControlAdvanced";
+            this.tabPageFanControlAdvanced.Padding = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            this.tabPageFanControlAdvanced.Size = new System.Drawing.Size(576, 362);
+            this.tabPageFanControlAdvanced.TabIndex = 0;
+            this.tabPageFanControlAdvanced.Text = "Advanced";
+            this.tabPageFanControlAdvanced.UseVisualStyleBackColor = true;
+            // 
+            // tableLayoutPanel2
+            // 
+            this.tableLayoutPanel2.ColumnCount = 1;
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel2.Controls.Add(this.groupBoxFanControl, 0, 1);
+            this.tableLayoutPanel2.Controls.Add(this.groupBoxFanSpeed, 0, 0);
+            this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel2.Location = new System.Drawing.Point(2, 3);
+            this.tableLayoutPanel2.Name = "tableLayoutPanel2";
+            this.tableLayoutPanel2.RowCount = 2;
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 55.93221F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 44.06779F));
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(572, 356);
+            this.tableLayoutPanel2.TabIndex = 0;
+            // 
+            // groupBoxFanControl
+            // 
+            this.groupBoxFanControl.Controls.Add(this.tableLayoutPanelFanControl);
+            this.groupBoxFanControl.Location = new System.Drawing.Point(3, 202);
+            this.groupBoxFanControl.Name = "groupBoxFanControl";
+            this.groupBoxFanControl.Size = new System.Drawing.Size(566, 150);
+            this.groupBoxFanControl.TabIndex = 10;
+            this.groupBoxFanControl.TabStop = false;
+            this.groupBoxFanControl.Text = "Fan Control";
+            // 
+            // tableLayoutPanelFanControl
+            // 
+            this.tableLayoutPanelFanControl.ColumnCount = 3;
+            this.tableLayoutPanelFanControl.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanelFanControl.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tableLayoutPanelFanControl.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tableLayoutPanelFanControl.Controls.Add(this.labelFanControlFault, 1, 0);
+            this.tableLayoutPanelFanControl.Controls.Add(this.textBoxFanControlFault, 1, 1);
+            this.tableLayoutPanelFanControl.Controls.Add(this.checkBoxFanControlOnOff, 0, 0);
+            this.tableLayoutPanelFanControl.Controls.Add(this.buttonFanControlReset, 1, 2);
+            this.tableLayoutPanelFanControl.Controls.Add(this.labelFanControlActivity, 2, 0);
+            this.tableLayoutPanelFanControl.Controls.Add(this.pictureBoxFanControlActivity, 2, 1);
+            this.tableLayoutPanelFanControl.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanelFanControl.Location = new System.Drawing.Point(3, 25);
+            this.tableLayoutPanelFanControl.Name = "tableLayoutPanelFanControl";
+            this.tableLayoutPanelFanControl.RowCount = 3;
+            this.tableLayoutPanelFanControl.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tableLayoutPanelFanControl.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 37.5F));
+            this.tableLayoutPanelFanControl.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 37.5F));
+            this.tableLayoutPanelFanControl.Size = new System.Drawing.Size(560, 122);
+            this.tableLayoutPanelFanControl.TabIndex = 1;
+            // 
+            // labelFanControlFault
+            // 
+            this.labelFanControlFault.AutoSize = true;
+            this.labelFanControlFault.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.labelFanControlFault.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelFanControlFault.Location = new System.Drawing.Point(283, 0);
+            this.labelFanControlFault.Name = "labelFanControlFault";
+            this.labelFanControlFault.Size = new System.Drawing.Size(134, 30);
+            this.labelFanControlFault.TabIndex = 0;
+            this.labelFanControlFault.Text = "Fault";
+            this.labelFanControlFault.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // textBoxFanControlFault
+            // 
+            this.textBoxFanControlFault.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.textBoxFanControlFault.Location = new System.Drawing.Point(283, 38);
+            this.textBoxFanControlFault.Name = "textBoxFanControlFault";
+            this.textBoxFanControlFault.Size = new System.Drawing.Size(134, 29);
+            this.textBoxFanControlFault.TabIndex = 1;
+            this.textBoxFanControlFault.Text = "N/A";
+            this.textBoxFanControlFault.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // checkBoxFanControlOnOff
+            // 
+            this.checkBoxFanControlOnOff.Appearance = System.Windows.Forms.Appearance.Button;
+            this.checkBoxFanControlOnOff.AutoSize = true;
+            this.checkBoxFanControlOnOff.BackColor = System.Drawing.Color.Transparent;
+            this.checkBoxFanControlOnOff.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.checkBoxFanControlOnOff.Location = new System.Drawing.Point(3, 3);
+            this.checkBoxFanControlOnOff.Name = "checkBoxFanControlOnOff";
+            this.tableLayoutPanelFanControl.SetRowSpan(this.checkBoxFanControlOnOff, 3);
+            this.checkBoxFanControlOnOff.Size = new System.Drawing.Size(274, 116);
+            this.checkBoxFanControlOnOff.TabIndex = 0;
+            this.checkBoxFanControlOnOff.Text = "Turn On";
+            this.checkBoxFanControlOnOff.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.checkBoxFanControlOnOff.UseVisualStyleBackColor = false;
+            this.checkBoxFanControlOnOff.CheckedChanged += new System.EventHandler(this.checkBoxFanControlOnOff_CheckedChanged);
+            // 
+            // buttonFanControlReset
+            // 
+            this.buttonFanControlReset.BackColor = System.Drawing.Color.Transparent;
+            this.tableLayoutPanelFanControl.SetColumnSpan(this.buttonFanControlReset, 2);
+            this.buttonFanControlReset.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.buttonFanControlReset.Enabled = false;
+            this.buttonFanControlReset.Location = new System.Drawing.Point(283, 78);
+            this.buttonFanControlReset.Name = "buttonFanControlReset";
+            this.buttonFanControlReset.Size = new System.Drawing.Size(274, 41);
+            this.buttonFanControlReset.TabIndex = 2;
+            this.buttonFanControlReset.Text = "Reset";
+            this.buttonFanControlReset.UseVisualStyleBackColor = false;
+            this.buttonFanControlReset.Click += new System.EventHandler(this.buttonFanControlReset_Click);
+            // 
+            // labelFanControlActivity
+            // 
+            this.labelFanControlActivity.AutoSize = true;
+            this.labelFanControlActivity.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.labelFanControlActivity.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F);
+            this.labelFanControlActivity.Location = new System.Drawing.Point(423, 0);
+            this.labelFanControlActivity.Name = "labelFanControlActivity";
+            this.labelFanControlActivity.Size = new System.Drawing.Size(134, 30);
+            this.labelFanControlActivity.TabIndex = 3;
+            this.labelFanControlActivity.Text = "Activity";
+            this.labelFanControlActivity.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // pictureBoxFanControlActivity
+            // 
+            this.pictureBoxFanControlActivity.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pictureBoxFanControlActivity.Location = new System.Drawing.Point(423, 33);
+            this.pictureBoxFanControlActivity.Name = "pictureBoxFanControlActivity";
+            this.pictureBoxFanControlActivity.Size = new System.Drawing.Size(134, 39);
+            this.pictureBoxFanControlActivity.TabIndex = 4;
+            this.pictureBoxFanControlActivity.TabStop = false;
+            // 
             // groupBoxFanSpeed
             // 
             this.groupBoxFanSpeed.Controls.Add(this.tableLayoutPanelFanSpeed);
-            this.groupBoxFanSpeed.Location = new System.Drawing.Point(3, 195);
+            this.groupBoxFanSpeed.Location = new System.Drawing.Point(3, 3);
             this.groupBoxFanSpeed.Name = "groupBoxFanSpeed";
-            this.groupBoxFanSpeed.Size = new System.Drawing.Size(582, 160);
-            this.groupBoxFanSpeed.TabIndex = 6;
+            this.groupBoxFanSpeed.Size = new System.Drawing.Size(566, 190);
+            this.groupBoxFanSpeed.TabIndex = 9;
             this.groupBoxFanSpeed.TabStop = false;
             this.groupBoxFanSpeed.Text = "Fan Speed";
             // 
@@ -503,24 +763,28 @@
             this.tableLayoutPanelFanSpeed.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
             this.tableLayoutPanelFanSpeed.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
             this.tableLayoutPanelFanSpeed.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanelFanSpeed.Controls.Add(this.labelFanSpeedSet, 2, 1);
+            this.tableLayoutPanelFanSpeed.Controls.Add(this.labelFanSpeedSet, 2, 2);
             this.tableLayoutPanelFanSpeed.Controls.Add(this.trackBarFanSpeed, 0, 0);
-            this.tableLayoutPanelFanSpeed.Controls.Add(this.textBoxFanSpeedSet, 2, 2);
-            this.tableLayoutPanelFanSpeed.Controls.Add(this.textBoxFanSpeedSelected, 0, 2);
-            this.tableLayoutPanelFanSpeed.Controls.Add(this.labelFanSpeedTarget, 0, 1);
-            this.tableLayoutPanelFanSpeed.Controls.Add(this.buttonFanSpeedApply, 1, 1);
-            this.tableLayoutPanelFanSpeed.Controls.Add(this.labelFanSpeedCurrent, 3, 1);
-            this.tableLayoutPanelFanSpeed.Controls.Add(this.textBoxFanSpeedCurrent, 3, 2);
+            this.tableLayoutPanelFanSpeed.Controls.Add(this.textBoxFanSpeedSet, 2, 3);
+            this.tableLayoutPanelFanSpeed.Controls.Add(this.textBoxFanSpeedSelected, 0, 3);
+            this.tableLayoutPanelFanSpeed.Controls.Add(this.labelFanSpeedTarget, 0, 2);
+            this.tableLayoutPanelFanSpeed.Controls.Add(this.buttonFanSpeedApply, 1, 2);
+            this.tableLayoutPanelFanSpeed.Controls.Add(this.labelFanSpeedCurrent, 3, 2);
+            this.tableLayoutPanelFanSpeed.Controls.Add(this.textBoxFanSpeedCurrent, 3, 3);
+            this.tableLayoutPanelFanSpeed.Controls.Add(this.buttonFanSpeedDecPlus, 0, 1);
+            this.tableLayoutPanelFanSpeed.Controls.Add(this.buttonFanSpeedDec, 1, 1);
+            this.tableLayoutPanelFanSpeed.Controls.Add(this.buttonFanSpeedInc, 2, 1);
+            this.tableLayoutPanelFanSpeed.Controls.Add(this.buttonFanSpeecIncPlus, 3, 1);
             this.tableLayoutPanelFanSpeed.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanelFanSpeed.Location = new System.Drawing.Point(3, 25);
             this.tableLayoutPanelFanSpeed.Name = "tableLayoutPanelFanSpeed";
-            this.tableLayoutPanelFanSpeed.RowCount = 3;
-            this.tableLayoutPanelFanSpeed.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 37.5F));
-            this.tableLayoutPanelFanSpeed.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.tableLayoutPanelFanSpeed.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 37.5F));
+            this.tableLayoutPanelFanSpeed.RowCount = 4;
+            this.tableLayoutPanelFanSpeed.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 32.47863F));
+            this.tableLayoutPanelFanSpeed.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 42.73504F));
+            this.tableLayoutPanelFanSpeed.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 24.78633F));
+            this.tableLayoutPanelFanSpeed.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 33F));
             this.tableLayoutPanelFanSpeed.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanelFanSpeed.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanelFanSpeed.Size = new System.Drawing.Size(576, 132);
+            this.tableLayoutPanelFanSpeed.Size = new System.Drawing.Size(560, 162);
             this.tableLayoutPanelFanSpeed.TabIndex = 6;
             // 
             // labelFanSpeedSet
@@ -530,9 +794,9 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.labelFanSpeedSet.AutoSize = true;
             this.labelFanSpeedSet.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelFanSpeedSet.Location = new System.Drawing.Point(291, 49);
+            this.labelFanSpeedSet.Location = new System.Drawing.Point(283, 96);
             this.labelFanSpeedSet.Name = "labelFanSpeedSet";
-            this.labelFanSpeedSet.Size = new System.Drawing.Size(138, 33);
+            this.labelFanSpeedSet.Size = new System.Drawing.Size(134, 31);
             this.labelFanSpeedSet.TabIndex = 4;
             this.labelFanSpeedSet.Text = "Set Point";
             this.labelFanSpeedSet.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -548,7 +812,7 @@
             this.trackBarFanSpeed.Margin = new System.Windows.Forms.Padding(0);
             this.trackBarFanSpeed.Maximum = 60;
             this.trackBarFanSpeed.Name = "trackBarFanSpeed";
-            this.trackBarFanSpeed.Size = new System.Drawing.Size(576, 49);
+            this.trackBarFanSpeed.Size = new System.Drawing.Size(560, 41);
             this.trackBarFanSpeed.TabIndex = 1;
             this.trackBarFanSpeed.Value = 30;
             this.trackBarFanSpeed.ValueChanged += new System.EventHandler(this.trackBarFanSpeed_ValueChanged);
@@ -557,10 +821,10 @@
             // 
             this.textBoxFanSpeedSet.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.textBoxFanSpeedSet.BackColor = System.Drawing.SystemColors.Window;
-            this.textBoxFanSpeedSet.Location = new System.Drawing.Point(291, 92);
+            this.textBoxFanSpeedSet.Location = new System.Drawing.Point(283, 130);
             this.textBoxFanSpeedSet.Name = "textBoxFanSpeedSet";
             this.textBoxFanSpeedSet.ReadOnly = true;
-            this.textBoxFanSpeedSet.Size = new System.Drawing.Size(138, 29);
+            this.textBoxFanSpeedSet.Size = new System.Drawing.Size(134, 29);
             this.textBoxFanSpeedSet.TabIndex = 5;
             this.textBoxFanSpeedSet.Text = "N/A";
             this.textBoxFanSpeedSet.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
@@ -568,11 +832,11 @@
             // textBoxFanSpeedSelected
             // 
             this.textBoxFanSpeedSelected.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBoxFanSpeedSelected.Location = new System.Drawing.Point(3, 92);
+            this.textBoxFanSpeedSelected.Location = new System.Drawing.Point(3, 130);
             this.textBoxFanSpeedSelected.Name = "textBoxFanSpeedSelected";
-            this.textBoxFanSpeedSelected.Size = new System.Drawing.Size(138, 29);
+            this.textBoxFanSpeedSelected.Size = new System.Drawing.Size(134, 29);
             this.textBoxFanSpeedSelected.TabIndex = 5;
-            this.textBoxFanSpeedSelected.Text = "N/A";
+            this.textBoxFanSpeedSelected.Text = "0";
             this.textBoxFanSpeedSelected.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // labelFanSpeedTarget
@@ -582,9 +846,9 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.labelFanSpeedTarget.AutoSize = true;
             this.labelFanSpeedTarget.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelFanSpeedTarget.Location = new System.Drawing.Point(3, 49);
+            this.labelFanSpeedTarget.Location = new System.Drawing.Point(3, 96);
             this.labelFanSpeedTarget.Name = "labelFanSpeedTarget";
-            this.labelFanSpeedTarget.Size = new System.Drawing.Size(138, 33);
+            this.labelFanSpeedTarget.Size = new System.Drawing.Size(134, 31);
             this.labelFanSpeedTarget.TabIndex = 3;
             this.labelFanSpeedTarget.Text = "Selected Speed";
             this.labelFanSpeedTarget.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -593,10 +857,10 @@
             // 
             this.buttonFanSpeedApply.Dock = System.Windows.Forms.DockStyle.Fill;
             this.buttonFanSpeedApply.Enabled = false;
-            this.buttonFanSpeedApply.Location = new System.Drawing.Point(147, 52);
+            this.buttonFanSpeedApply.Location = new System.Drawing.Point(143, 99);
             this.buttonFanSpeedApply.Name = "buttonFanSpeedApply";
             this.tableLayoutPanelFanSpeed.SetRowSpan(this.buttonFanSpeedApply, 2);
-            this.buttonFanSpeedApply.Size = new System.Drawing.Size(138, 77);
+            this.buttonFanSpeedApply.Size = new System.Drawing.Size(134, 60);
             this.buttonFanSpeedApply.TabIndex = 6;
             this.buttonFanSpeedApply.Text = "Apply";
             this.buttonFanSpeedApply.UseVisualStyleBackColor = true;
@@ -607,9 +871,9 @@
             this.labelFanSpeedCurrent.AutoSize = true;
             this.labelFanSpeedCurrent.Dock = System.Windows.Forms.DockStyle.Fill;
             this.labelFanSpeedCurrent.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelFanSpeedCurrent.Location = new System.Drawing.Point(435, 49);
+            this.labelFanSpeedCurrent.Location = new System.Drawing.Point(423, 96);
             this.labelFanSpeedCurrent.Name = "labelFanSpeedCurrent";
-            this.labelFanSpeedCurrent.Size = new System.Drawing.Size(138, 33);
+            this.labelFanSpeedCurrent.Size = new System.Drawing.Size(134, 31);
             this.labelFanSpeedCurrent.TabIndex = 7;
             this.labelFanSpeedCurrent.Text = "Current Speed";
             this.labelFanSpeedCurrent.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -617,12 +881,56 @@
             // textBoxFanSpeedCurrent
             // 
             this.textBoxFanSpeedCurrent.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBoxFanSpeedCurrent.Location = new System.Drawing.Point(435, 92);
+            this.textBoxFanSpeedCurrent.Location = new System.Drawing.Point(423, 130);
             this.textBoxFanSpeedCurrent.Name = "textBoxFanSpeedCurrent";
-            this.textBoxFanSpeedCurrent.Size = new System.Drawing.Size(138, 29);
+            this.textBoxFanSpeedCurrent.Size = new System.Drawing.Size(134, 29);
             this.textBoxFanSpeedCurrent.TabIndex = 8;
             this.textBoxFanSpeedCurrent.Text = "N/A";
             this.textBoxFanSpeedCurrent.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // buttonFanSpeedDecPlus
+            // 
+            this.buttonFanSpeedDecPlus.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.buttonFanSpeedDecPlus.Location = new System.Drawing.Point(3, 44);
+            this.buttonFanSpeedDecPlus.Name = "buttonFanSpeedDecPlus";
+            this.buttonFanSpeedDecPlus.Size = new System.Drawing.Size(134, 49);
+            this.buttonFanSpeedDecPlus.TabIndex = 9;
+            this.buttonFanSpeedDecPlus.Text = "<< -10";
+            this.buttonFanSpeedDecPlus.UseVisualStyleBackColor = true;
+            this.buttonFanSpeedDecPlus.Click += new System.EventHandler(this.buttonFanSpeedDecPlus_Click);
+            // 
+            // buttonFanSpeedDec
+            // 
+            this.buttonFanSpeedDec.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.buttonFanSpeedDec.Location = new System.Drawing.Point(143, 44);
+            this.buttonFanSpeedDec.Name = "buttonFanSpeedDec";
+            this.buttonFanSpeedDec.Size = new System.Drawing.Size(134, 49);
+            this.buttonFanSpeedDec.TabIndex = 10;
+            this.buttonFanSpeedDec.Text = "< -2";
+            this.buttonFanSpeedDec.UseVisualStyleBackColor = true;
+            this.buttonFanSpeedDec.Click += new System.EventHandler(this.buttonFanSpeedDec_Click);
+            // 
+            // buttonFanSpeedInc
+            // 
+            this.buttonFanSpeedInc.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.buttonFanSpeedInc.Location = new System.Drawing.Point(283, 44);
+            this.buttonFanSpeedInc.Name = "buttonFanSpeedInc";
+            this.buttonFanSpeedInc.Size = new System.Drawing.Size(134, 49);
+            this.buttonFanSpeedInc.TabIndex = 11;
+            this.buttonFanSpeedInc.Text = "+2 >";
+            this.buttonFanSpeedInc.UseVisualStyleBackColor = true;
+            this.buttonFanSpeedInc.Click += new System.EventHandler(this.buttonFanSpeedInc_Click);
+            // 
+            // buttonFanSpeecIncPlus
+            // 
+            this.buttonFanSpeecIncPlus.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.buttonFanSpeecIncPlus.Location = new System.Drawing.Point(423, 44);
+            this.buttonFanSpeecIncPlus.Name = "buttonFanSpeecIncPlus";
+            this.buttonFanSpeecIncPlus.Size = new System.Drawing.Size(134, 49);
+            this.buttonFanSpeecIncPlus.TabIndex = 12;
+            this.buttonFanSpeecIncPlus.Text = "+10 >>";
+            this.buttonFanSpeecIncPlus.UseVisualStyleBackColor = true;
+            this.buttonFanSpeecIncPlus.Click += new System.EventHandler(this.buttonFanSpeedIncPlus_Click);
             // 
             // tabOverride
             // 
@@ -661,19 +969,22 @@
             // 
             this.diagnosticsTextBox.AcceptsReturn = true;
             this.diagnosticsTextBox.BackColor = System.Drawing.SystemColors.Window;
-            this.diagnosticsTextBox.DisplayBufferSize = 200;
+            this.diagnosticsTextBox.DisplayBufferSize = 80;
             this.diagnosticsTextBox.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.diagnosticsTextBox.FlushEnabled = false;
             this.diagnosticsTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F);
             this.diagnosticsTextBox.ForeColor = System.Drawing.SystemColors.WindowText;
+            this.diagnosticsTextBox.ListenerEnabled = false;
             this.diagnosticsTextBox.Location = new System.Drawing.Point(3, 3);
             this.diagnosticsTextBox.Multiline = true;
             this.diagnosticsTextBox.Name = "diagnosticsTextBox";
+            this.diagnosticsTextBox.OutputFile = null;
+            this.diagnosticsTextBox.OutputFileBackup = null;
             this.diagnosticsTextBox.ReadOnly = true;
             this.diagnosticsTextBox.RefreshInterval = 250;
             this.diagnosticsTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.diagnosticsTextBox.Size = new System.Drawing.Size(586, 578);
             this.diagnosticsTextBox.TabIndex = 0;
-            this.diagnosticsTextBox.Theme = CodeArtEng.Diagnostics.TextBoxTheme.UserDefined;
             this.diagnosticsTextBox.TimeStampFormat = "yyyy-MM-dd HH:mm:ss.fff";
             this.diagnosticsTextBox.WordWrap = false;
             // 
@@ -713,13 +1024,23 @@
             this.tabStatus.ResumeLayout(false);
             this.tabFan.ResumeLayout(false);
             this.tableLayoutPanelFan.ResumeLayout(false);
+            this.groupBoxFanInfo.ResumeLayout(false);
+            this.tableLayoutPanel1.ResumeLayout(false);
+            this.tableLayoutPanel1.PerformLayout();
+            this.tabControlFan.ResumeLayout(false);
+            this.tabPageFanControlBasic.ResumeLayout(false);
+            this.tableLayoutPanel3.ResumeLayout(false);
+            this.groupFanBasicSpeed.ResumeLayout(false);
+            this.tableLayoutPanel4.ResumeLayout(false);
+            this.tableLayoutPanel4.PerformLayout();
+            this.groupFanBasicDirection.ResumeLayout(false);
+            this.tableLayoutPanelFanBasicDirection.ResumeLayout(false);
+            this.tabPageFanControlAdvanced.ResumeLayout(false);
+            this.tableLayoutPanel2.ResumeLayout(false);
             this.groupBoxFanControl.ResumeLayout(false);
             this.tableLayoutPanelFanControl.ResumeLayout(false);
             this.tableLayoutPanelFanControl.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxFanControlActivity)).EndInit();
-            this.groupBoxFanInfo.ResumeLayout(false);
-            this.tableLayoutPanel1.ResumeLayout(false);
-            this.tableLayoutPanel1.PerformLayout();
             this.groupBoxFanSpeed.ResumeLayout(false);
             this.tableLayoutPanelFanSpeed.ResumeLayout(false);
             this.tableLayoutPanelFanSpeed.PerformLayout();
@@ -741,19 +1062,7 @@
         private System.Windows.Forms.TabPage tabInfo;
         private System.Windows.Forms.TabPage tabLog;
         private CodeArtEng.Diagnostics.Controls.DiagnosticsTextBox diagnosticsTextBox;
-        private System.Windows.Forms.GroupBox groupBoxFanControl;
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanelFanControl;
-        private System.Windows.Forms.CheckBox checkBoxFanControlOnOff;
-        private System.Windows.Forms.GroupBox groupBoxFanSpeed;
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanelFanSpeed;
-        private System.Windows.Forms.Label labelFanSpeedSet;
-        private System.Windows.Forms.TrackBar trackBarFanSpeed;
-        private System.Windows.Forms.Label labelFanSpeedTarget;
-        private System.Windows.Forms.Button buttonFanSpeedApply;
-        private System.Windows.Forms.Label labelFanControlFault;
-        private System.Windows.Forms.TextBox textBoxFanControlFault;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanelFan;
-        private System.Windows.Forms.Button buttonFanControlReset;
         private System.Windows.Forms.GroupBox groupBoxFanInfo;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.Label labelFanInfoMotorPower;
@@ -768,13 +1077,46 @@
         private System.Windows.Forms.TextBox textBoxFanInfoDCBusV;
         private System.Windows.Forms.TextBox textBoxFanInfoHSTemp;
         private System.Windows.Forms.TextBox textBoxFanInfoInternalTemp;
-        private System.Windows.Forms.TextBox textBoxFanSpeedSet;
-        private System.Windows.Forms.TextBox textBoxFanSpeedSelected;
-        private System.Windows.Forms.Label labelFanSpeedCurrent;
-        private System.Windows.Forms.TextBox textBoxFanSpeedCurrent;
         private System.Windows.Forms.ImageList imageList1;
+        private System.Windows.Forms.TabControl tabControlFan;
+        private System.Windows.Forms.TabPage tabPageFanControlBasic;
+        private System.Windows.Forms.TabPage tabPageFanControlAdvanced;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
+        private System.Windows.Forms.GroupBox groupBoxFanControl;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanelFanControl;
+        private System.Windows.Forms.Label labelFanControlFault;
+        private System.Windows.Forms.TextBox textBoxFanControlFault;
+        private System.Windows.Forms.CheckBox checkBoxFanControlOnOff;
+        private System.Windows.Forms.Button buttonFanControlReset;
         private System.Windows.Forms.Label labelFanControlActivity;
         private System.Windows.Forms.PictureBox pictureBoxFanControlActivity;
+        private System.Windows.Forms.GroupBox groupBoxFanSpeed;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanelFanSpeed;
+        private System.Windows.Forms.Label labelFanSpeedSet;
+        private System.Windows.Forms.TrackBar trackBarFanSpeed;
+        private System.Windows.Forms.TextBox textBoxFanSpeedSet;
+        private System.Windows.Forms.TextBox textBoxFanSpeedSelected;
+        private System.Windows.Forms.Label labelFanSpeedTarget;
+        private System.Windows.Forms.Button buttonFanSpeedApply;
+        private System.Windows.Forms.Label labelFanSpeedCurrent;
+        private System.Windows.Forms.TextBox textBoxFanSpeedCurrent;
+        private System.Windows.Forms.Button buttonFanSpeedDecPlus;
+        private System.Windows.Forms.Button buttonFanSpeedDec;
+        private System.Windows.Forms.Button buttonFanSpeedInc;
+        private System.Windows.Forms.Button buttonFanSpeecIncPlus;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel3;
+        private System.Windows.Forms.GroupBox groupFanBasicSpeed;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel4;
+        private System.Windows.Forms.RadioButton radioButtonFanBasicSpeedTurbo;
+        private System.Windows.Forms.RadioButton radioButtonFanBasicSpeedHigh;
+        private System.Windows.Forms.RadioButton radioButtonFanBasicSpeed2;
+        private System.Windows.Forms.RadioButton radioButtonFanBasicSpeed1;
+        private System.Windows.Forms.RadioButton radioButtonFanBasicSpeedLow;
+        private System.Windows.Forms.RadioButton radioButtonFanBasicSpeedOff;
+        private System.Windows.Forms.GroupBox groupFanBasicDirection;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanelFanBasicDirection;
+        private System.Windows.Forms.RadioButton radioButtonFanBasicDirectionReverse;
+        private System.Windows.Forms.RadioButton radioButtonFanBasicDirectionForward;
     }
 }
 

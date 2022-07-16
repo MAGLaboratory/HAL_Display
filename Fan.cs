@@ -45,6 +45,12 @@ namespace HAL_Display
             // last receive values
             public Dictionary<string, string> last;
 
+            public int fsLow = 24;
+            public int fs1 = 34;
+            public int fs2 = 42;
+            public int fsHigh = 60;
+            public int fsTurbo = 80;
+
             public Fan()
             {
                 // initialize with all integer targets
@@ -307,6 +313,157 @@ namespace HAL_Display
                 .Build();
             await this.mqttClient.PublishAsync(message);
             Debug.WriteLine(">> Fan Trip Reset.");
+        }
+
+        private void buttonFanSpeedDec_Click(object sender, EventArgs e)
+        {
+            int v = trackBarFanSpeed.Value;
+            v -= 1;
+            if (v >= trackBarFanSpeed.Minimum)
+            {
+                trackBarFanSpeed.Value = v;
+            }
+            Debug.WriteLine(">> Fan Speed Dec: " + v.ToString());
+        }
+
+        private void buttonFanSpeedInc_Click(object sender, EventArgs e)
+        {
+            int v = trackBarFanSpeed.Value;
+            v += 1;
+            if (v <= trackBarFanSpeed.Maximum)
+            {
+                trackBarFanSpeed.Value = v;
+            }
+            Debug.WriteLine(">> Fan Speed Inc: " + v.ToString());
+        }
+
+        private void buttonFanSpeedDecPlus_Click(object sender, EventArgs e)
+        {
+            int v = trackBarFanSpeed.Value;
+            v -= 5;
+            if (v >= trackBarFanSpeed.Minimum)
+            {
+                trackBarFanSpeed.Value = v;
+            }
+            Debug.WriteLine(">> Fan Speed DecPlus: " + v.ToString());
+        }
+
+        private void buttonFanSpeedIncPlus_Click(object sender, EventArgs e)
+        {
+            int v = trackBarFanSpeed.Value;
+            v += 5;
+            if (v <= trackBarFanSpeed.Maximum)
+            {
+                trackBarFanSpeed.Value = v;
+            }
+            Debug.WriteLine(">> Fan Speed IncPlus: " + v.ToString());
+        }
+
+        private void radioButtonFanBasicSpeed_Click(object sender, EventArgs e)
+        {
+            int v = 0;
+            StringBuilder debugString = new StringBuilder(">> ");
+            bool err = false;
+            if (radioButtonFanBasicSpeedOff.Checked)
+            {
+                v = 0;
+                debugString.Append("Fan Set to Off ");
+            }
+            else if (radioButtonFanBasicSpeedLow.Checked)
+            {
+                v = this.fan.fsLow;
+                debugString.Append("Fan Set to Low ");
+            }
+            else if (radioButtonFanBasicSpeed1.Checked)
+            {
+                v = this.fan.fs1;
+                debugString.Append("Fan Set to One ");
+            }
+            else if (radioButtonFanBasicSpeed2.Checked)
+            {
+                v = this.fan.fs2;
+                debugString.Append("Fan Set to Two ");
+            }
+            else if (radioButtonFanBasicSpeedHigh.Checked)
+            {
+                v = this.fan.fsHigh;
+                debugString.Append("Fan Set to High ");
+            }
+            else if (radioButtonFanBasicSpeedTurbo.Checked)
+            {
+                v = this.fan.fsTurbo;
+                debugString.Append("Fan Set to Turbo ");
+            }
+            else
+            {
+                // error condition where none of the radio buttons are checked???
+                debugString.Append("No Fan Speed Set!");
+                err = true;
+            }
+
+            if (radioButtonFanBasicDirectionForward.Checked)
+            {
+                debugString.Append(", Forward ");
+            }
+            else if (radioButtonFanBasicDirectionReverse.Checked)
+            {
+                debugString.Append(", Reverse ");
+                v *= -1;
+            }
+            else
+            {
+                // error condition where none of the radio buttons are checked???
+                debugString.Append(" , No Fan Direction Set!");
+                err = true;
+            }
+
+            // calculate track bar fan speed
+            if (err == false)
+            {
+                int iTrackbarSpeed = v;
+                iTrackbarSpeed /= 2;
+                iTrackbarSpeed += (trackBarFanSpeed.Maximum / 2);
+                if (iTrackbarSpeed >= trackBarFanSpeed.Minimum && iTrackbarSpeed <= trackBarFanSpeed.Maximum)
+                {
+                    trackBarFanSpeed.Value = iTrackbarSpeed;
+                }
+                else
+                {
+                    err = true;
+                    debugString.Append("Error: speed out-of-bounds.");
+                }
+            }
+
+            if (err == false)
+            {
+                debugString.Append(v.ToString());
+                Debug.WriteLine(debugString);
+            }
+            else
+            {
+                debugString.Append(v.ToString());
+                debugString[0] = '!';
+                debugString[1] = '!';
+                Debug.WriteLine(debugString);
+            }
+
+            if (err == false)
+            {
+                this.buttonFanSpeedApply_Click(this, e);
+            }
+
+            // calculate run checked status
+            if (err == false)
+            {
+                if (v != 0)
+                {
+                    checkBoxFanControlOnOff.Checked = true;
+                }
+                else
+                {
+                    checkBoxFanControlOnOff.Checked = false;
+                }
+            }
         }
     }
 }
