@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
@@ -27,6 +28,27 @@ namespace HAL_Display
         SynopticData synopticData;
         IManagedMqttClient mqttClient;
 
+        public class Config
+        {
+            public string name;
+            public string description;
+            public int checkup_freq;
+            public int checkup_buffer;
+            public string mqtt_broker;
+            public int mqtt_port;
+            public int mqtt_timeout;
+            public bool main_display;
+        };
+        Config config;
+
+        public class Checkup
+        {
+            public string d_fanCmdOn;
+            public string d_fanCmdSpd;
+            public string Private_Switch;
+        }
+        Checkup checkup;
+
         class Hal_Controller_Checkup
         {
 
@@ -40,7 +62,20 @@ namespace HAL_Display
 
         public Display()
         {
+            const string jsonFile = @"HAL_Display.json";
             Debug.WriteLine("Initializing Display.");
+            var jsonSerializer = new JsonSerializer();
+            var sw = new StreamReader(jsonFile);
+            var reader = new JsonTextReader(sw);
+            config = jsonSerializer.Deserialize<Config>(reader);
+            sw.Close();
+
+            checkup = new Checkup();
+
+            checkup.d_fanCmdOn = "0";
+            checkup.d_fanCmdSpd = "600";
+            checkup.Private_Switch = "0";
+
             InitializeComponent();
             // even though it is set to allow word wrap through the designer,
             // you have to set it again???
@@ -67,7 +102,8 @@ namespace HAL_Display
             tabPageFanControlAdvanced.Show();
             tabPageFanControlBasic.Show();
             tabStatus.Show();
-            Debug.WriteLine("Starting MQTT.");
+            Debug.WriteLine(">> " + config.name + " is my name.");
+            Debug.WriteLine(">> Starting MQTT.");
             mqttEn();
             fan = new Fan();
             this.fan.boxes.Add("Motor_Power", this.textBoxFanInfoMotorPower);
@@ -83,12 +119,13 @@ namespace HAL_Display
 
         private async void mqttEn()
         {
+            Debug.WriteLine("Connecting to " + config.mqtt_broker);
             // Setup and start a managed MQTT client.
             var options = new ManagedMqttClientOptionsBuilder()
                 .WithAutoReconnectDelay(TimeSpan.FromSeconds(5))
                 .WithClientOptions(new MqttClientOptionsBuilder()
-                    .WithClientId("HALDisplay")
-                    .WithTcpServer("localhost")
+                    .WithClientId(config.name)
+                    .WithTcpServer(config.mqtt_broker, config.mqtt_port)
                     .Build())
                 .Build();
 
@@ -157,17 +194,28 @@ namespace HAL_Display
                 FanHandler(obj);
                 SynopticHandler(obj);
             }
-            if (obj.ApplicationMessage.Topic.StartsWith("tweeter/"))
+            else if (obj.ApplicationMessage.Topic.StartsWith("tweeter/"))
             {
                 SynopticHandler(obj);
             }
-            if (obj.ApplicationMessage.Topic.StartsWith("haldor/"))
+            else if (obj.ApplicationMessage.Topic.StartsWith("haldor/"))
             {
                 SynopticHandler(obj);
             }
-            if (obj.ApplicationMessage.Topic.StartsWith("daisy/"))
+            else if (obj.ApplicationMessage.Topic.StartsWith("daisy/"))
             {
                 SynopticHandler(obj);
+            }
+            else if (obj.ApplicationMessage.Topic == "reporter/checkup_req")
+            {
+                Debug.WriteLine(">> Checkup Request Received");
+                if (config.main_display)
+                {
+                    String message = JsonConvert.SerializeObject(checkup);
+                }
+            }
+            else if (obj.ApplicationMessage.Topic.StartsWith("display/"))
+            {
             }
 
             // the running message for the fan is omitted because there are too many
@@ -201,6 +249,29 @@ namespace HAL_Display
                 // This is here in case the fan speed textbox is changed and not the trackbar
                 // TODO
             }
+        }
+
+        private async void radioButtonOverridePrivacy_Click(object sender, EventArgs e)
+        {
+            StringBuilder jsonMessage = new StringBuilder("{");
+            char privacy_value = '0';
+            if (radioButtonOverridePrivacyOn.Checked)
+            {
+                jsonMessage.Append("\"Privacy_Switch\":\"1\"");
+                privacy_value = '1';
+            }
+            else
+            {
+                jsonMessage.Append("\"Privacy_Switch\":\"0\"");
+                privacy_value = '0';
+            }
+            jsonMessage.Append("}");
+            var message = new MqttApplicationMessageBuilder()
+                .WithTopic("display/event")
+                .WithPayload(jsonMessage.ToString())
+                .Build();
+            await this.mqttClient.PublishAsync(message);
+            Debug.WriteLine(">> Privacy Switch : " + privacy_value);
         }
 
         // stop the MQTT client when the display closes

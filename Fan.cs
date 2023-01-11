@@ -37,7 +37,7 @@ namespace HAL_Display
             }
 
             // last receive values
-            public Dictionary<string, Citem> checkup;
+            public Dictionary<string, Citem> fanData;
 
             // text boxes to update with the values
             public Dictionary<string, TextBox> boxes;
@@ -45,16 +45,16 @@ namespace HAL_Display
             // last receive values
             public Dictionary<string, string> last;
 
-            public int fsLow = 24;
-            public int fs1 = 34;
-            public int fs2 = 42;
-            public int fsHigh = 60;
+            public int fsLow   = 25;
+            public int fs1     = 35;
+            public int fs2     = 42;
+            public int fsHigh  = 60;
             public int fsTurbo = 80;
 
             public Fan()
             {
                 // initialize with all integer targets
-                this.checkup = new Dictionary<string, Citem>()
+                this.fanData = new Dictionary<string, Citem>()
                 {
                     {"Max_Speed", new Citem(null, 0, 60 ) },
                     {"Set_Point", new Citem(null, 0, 0) },
@@ -91,7 +91,7 @@ namespace HAL_Display
                 string value = entry.Value;
 
                 // TODO: error handling
-                if (this.fan.checkup.ContainsKey(key) && this.fan.checkup[key].str == null)
+                if (this.fan.fanData.ContainsKey(key) && this.fan.fanData[key].str == null)
                 {
                     int parsed_value;
                     if (value.ToLower() == "true")
@@ -106,8 +106,8 @@ namespace HAL_Display
                     {
                         parsed_value = int.Parse(value);
                     }
-                    this.fan.checkup[key].val = parsed_value;
-                    this.fan.checkup[key].last_update = update_time;
+                    this.fan.fanData[key].val = parsed_value;
+                    this.fan.fanData[key].last_update = update_time;
 
                     if (this.fan.boxes.ContainsKey(key))
                     {
@@ -249,14 +249,14 @@ namespace HAL_Display
                         }
                     }
                 }
-                else if (this.fan.checkup.ContainsKey(key))
+                else if (this.fan.fanData.ContainsKey(key))
                 {
-                    this.fan.checkup[key].str = value;
-                    this.fan.checkup[key].last_update = update_time;
+                    this.fan.fanData[key].str = value;
+                    this.fan.fanData[key].last_update = update_time;
                 }
                 else
                 {
-                    this.fan.checkup.Add(key, new Fan.Citem(value, update_time, 0));
+                    this.fan.fanData.Add(key, new Fan.Citem(value, update_time, 0));
                 }
                 this.fan.last[key] = value;
             }
@@ -304,6 +304,7 @@ namespace HAL_Display
                 .Build();
             await this.mqttClient.PublishAsync(message);
             Debug.WriteLine(">> Fan Speed Application: " + this.textBoxFanSpeedSelected.Text + "0");
+            checkup.d_fanCmdSpd = this.textBoxFanSpeedSelected.Text + "0";
         }
 
         private async void buttonFanControlReset_Click(object sender, EventArgs e)
@@ -458,10 +459,12 @@ namespace HAL_Display
                 if (v != 0)
                 {
                     checkBoxFanControlOnOff.Checked = true;
+                    checkup.d_fanCmdOn = "1";
                 }
                 else
                 {
                     checkBoxFanControlOnOff.Checked = false;
+                    checkup.d_fanCmdOn = "0";
                 }
             }
         }

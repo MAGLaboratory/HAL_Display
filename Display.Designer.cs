@@ -38,7 +38,7 @@
             this.tabFan = new System.Windows.Forms.TabPage();
             this.tableLayoutPanelFan = new System.Windows.Forms.TableLayoutPanel();
             this.groupBoxFanInfo = new System.Windows.Forms.GroupBox();
-            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.tableLayoutPanelFanInfo = new System.Windows.Forms.TableLayoutPanel();
             this.labelFanInfoMotorPower = new System.Windows.Forms.Label();
             this.labelFanInfoMotorVoltage = new System.Windows.Forms.Label();
             this.labelFanInfoMotorCurrent = new System.Windows.Forms.Label();
@@ -53,9 +53,9 @@
             this.textBoxFanInfoInternalTemp = new System.Windows.Forms.TextBox();
             this.tabControlFan = new System.Windows.Forms.TabControl();
             this.tabPageFanControlBasic = new System.Windows.Forms.TabPage();
-            this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
+            this.tableLayoutPanelBas = new System.Windows.Forms.TableLayoutPanel();
             this.groupFanBasicSpeed = new System.Windows.Forms.GroupBox();
-            this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
+            this.tableLayoutPanelBasFanSpeed = new System.Windows.Forms.TableLayoutPanel();
             this.radioButtonFanBasicSpeedTurbo = new System.Windows.Forms.RadioButton();
             this.radioButtonFanBasicSpeedHigh = new System.Windows.Forms.RadioButton();
             this.radioButtonFanBasicSpeed2 = new System.Windows.Forms.RadioButton();
@@ -67,7 +67,7 @@
             this.radioButtonFanBasicDirectionReverse = new System.Windows.Forms.RadioButton();
             this.radioButtonFanBasicDirectionForward = new System.Windows.Forms.RadioButton();
             this.tabPageFanControlAdvanced = new System.Windows.Forms.TabPage();
-            this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
+            this.tableLayoutPanelFanAdv = new System.Windows.Forms.TableLayoutPanel();
             this.groupBoxFanControl = new System.Windows.Forms.GroupBox();
             this.tableLayoutPanelFanControl = new System.Windows.Forms.TableLayoutPanel();
             this.labelFanControlFault = new System.Windows.Forms.Label();
@@ -77,7 +77,7 @@
             this.labelFanControlActivity = new System.Windows.Forms.Label();
             this.pictureBoxFanControlActivity = new System.Windows.Forms.PictureBox();
             this.groupBoxFanSpeed = new System.Windows.Forms.GroupBox();
-            this.tableLayoutPanelFanSpeed = new System.Windows.Forms.TableLayoutPanel();
+            this.tableLayoutPanelAdvFanSpeed = new System.Windows.Forms.TableLayoutPanel();
             this.labelFanSpeedSet = new System.Windows.Forms.Label();
             this.trackBarFanSpeed = new System.Windows.Forms.TrackBar();
             this.textBoxFanSpeedSet = new System.Windows.Forms.TextBox();
@@ -91,6 +91,11 @@
             this.buttonFanSpeedInc = new System.Windows.Forms.Button();
             this.buttonFanSpeecIncPlus = new System.Windows.Forms.Button();
             this.tabOverride = new System.Windows.Forms.TabPage();
+            this.tableLayoutPanelOverride = new System.Windows.Forms.TableLayoutPanel();
+            this.groupBoxOverridePrivacySwitch = new System.Windows.Forms.GroupBox();
+            this.tableLayoutPanelOverridePrivacy = new System.Windows.Forms.TableLayoutPanel();
+            this.radioButtonOverridePrivacyOff = new System.Windows.Forms.RadioButton();
+            this.radioButtonOverridePrivacyOn = new System.Windows.Forms.RadioButton();
             this.tabInfo = new System.Windows.Forms.TabPage();
             this.tabLog = new System.Windows.Forms.TabPage();
             this.diagnosticsTextBox = new CodeArtEng.Diagnostics.Controls.DiagnosticsTextBox();
@@ -104,22 +109,26 @@
             this.tabFan.SuspendLayout();
             this.tableLayoutPanelFan.SuspendLayout();
             this.groupBoxFanInfo.SuspendLayout();
-            this.tableLayoutPanel1.SuspendLayout();
+            this.tableLayoutPanelFanInfo.SuspendLayout();
             this.tabControlFan.SuspendLayout();
             this.tabPageFanControlBasic.SuspendLayout();
-            this.tableLayoutPanel3.SuspendLayout();
+            this.tableLayoutPanelBas.SuspendLayout();
             this.groupFanBasicSpeed.SuspendLayout();
-            this.tableLayoutPanel4.SuspendLayout();
+            this.tableLayoutPanelBasFanSpeed.SuspendLayout();
             this.groupFanBasicDirection.SuspendLayout();
             this.tableLayoutPanelFanBasicDirection.SuspendLayout();
             this.tabPageFanControlAdvanced.SuspendLayout();
-            this.tableLayoutPanel2.SuspendLayout();
+            this.tableLayoutPanelFanAdv.SuspendLayout();
             this.groupBoxFanControl.SuspendLayout();
             this.tableLayoutPanelFanControl.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxFanControlActivity)).BeginInit();
             this.groupBoxFanSpeed.SuspendLayout();
-            this.tableLayoutPanelFanSpeed.SuspendLayout();
+            this.tableLayoutPanelAdvFanSpeed.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarFanSpeed)).BeginInit();
+            this.tabOverride.SuspendLayout();
+            this.tableLayoutPanelOverride.SuspendLayout();
+            this.groupBoxOverridePrivacySwitch.SuspendLayout();
+            this.tableLayoutPanelOverridePrivacy.SuspendLayout();
             this.tabLog.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -228,7 +237,7 @@
             // 
             // groupBoxFanInfo
             // 
-            this.groupBoxFanInfo.Controls.Add(this.tableLayoutPanel1);
+            this.groupBoxFanInfo.Controls.Add(this.tableLayoutPanelFanInfo);
             this.groupBoxFanInfo.Location = new System.Drawing.Point(3, 3);
             this.groupBoxFanInfo.Name = "groupBoxFanInfo";
             this.groupBoxFanInfo.Size = new System.Drawing.Size(582, 160);
@@ -236,34 +245,34 @@
             this.groupBoxFanInfo.TabStop = false;
             this.groupBoxFanInfo.Text = "Fan Info";
             // 
-            // tableLayoutPanel1
+            // tableLayoutPanelFanInfo
             // 
-            this.tableLayoutPanel1.ColumnCount = 3;
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33334F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33334F));
-            this.tableLayoutPanel1.Controls.Add(this.labelFanInfoMotorPower, 0, 0);
-            this.tableLayoutPanel1.Controls.Add(this.labelFanInfoMotorVoltage, 1, 0);
-            this.tableLayoutPanel1.Controls.Add(this.labelFanInfoMotorCurrent, 2, 0);
-            this.tableLayoutPanel1.Controls.Add(this.labelFanInfoDCBusV, 0, 2);
-            this.tableLayoutPanel1.Controls.Add(this.labelFanInfoHSTemp, 1, 2);
-            this.tableLayoutPanel1.Controls.Add(this.labelFanInfoInternalTemp, 2, 2);
-            this.tableLayoutPanel1.Controls.Add(this.textBoxFanInfoMotorPower, 0, 1);
-            this.tableLayoutPanel1.Controls.Add(this.textBoxFanInfoMotorVoltage, 1, 1);
-            this.tableLayoutPanel1.Controls.Add(this.textBoxFanInfoMotorCurrent, 2, 1);
-            this.tableLayoutPanel1.Controls.Add(this.textBoxFanInfoDCBusV, 0, 3);
-            this.tableLayoutPanel1.Controls.Add(this.textBoxFanInfoHSTemp, 1, 3);
-            this.tableLayoutPanel1.Controls.Add(this.textBoxFanInfoInternalTemp, 2, 3);
-            this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(3, 25);
-            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.RowCount = 4;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 30F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 30F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(576, 132);
-            this.tableLayoutPanel1.TabIndex = 0;
+            this.tableLayoutPanelFanInfo.ColumnCount = 3;
+            this.tableLayoutPanelFanInfo.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+            this.tableLayoutPanelFanInfo.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33334F));
+            this.tableLayoutPanelFanInfo.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33334F));
+            this.tableLayoutPanelFanInfo.Controls.Add(this.labelFanInfoMotorPower, 0, 0);
+            this.tableLayoutPanelFanInfo.Controls.Add(this.labelFanInfoMotorVoltage, 1, 0);
+            this.tableLayoutPanelFanInfo.Controls.Add(this.labelFanInfoMotorCurrent, 2, 0);
+            this.tableLayoutPanelFanInfo.Controls.Add(this.labelFanInfoDCBusV, 0, 2);
+            this.tableLayoutPanelFanInfo.Controls.Add(this.labelFanInfoHSTemp, 1, 2);
+            this.tableLayoutPanelFanInfo.Controls.Add(this.labelFanInfoInternalTemp, 2, 2);
+            this.tableLayoutPanelFanInfo.Controls.Add(this.textBoxFanInfoMotorPower, 0, 1);
+            this.tableLayoutPanelFanInfo.Controls.Add(this.textBoxFanInfoMotorVoltage, 1, 1);
+            this.tableLayoutPanelFanInfo.Controls.Add(this.textBoxFanInfoMotorCurrent, 2, 1);
+            this.tableLayoutPanelFanInfo.Controls.Add(this.textBoxFanInfoDCBusV, 0, 3);
+            this.tableLayoutPanelFanInfo.Controls.Add(this.textBoxFanInfoHSTemp, 1, 3);
+            this.tableLayoutPanelFanInfo.Controls.Add(this.textBoxFanInfoInternalTemp, 2, 3);
+            this.tableLayoutPanelFanInfo.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanelFanInfo.Location = new System.Drawing.Point(3, 25);
+            this.tableLayoutPanelFanInfo.Name = "tableLayoutPanelFanInfo";
+            this.tableLayoutPanelFanInfo.RowCount = 4;
+            this.tableLayoutPanelFanInfo.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.tableLayoutPanelFanInfo.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 30F));
+            this.tableLayoutPanelFanInfo.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.tableLayoutPanelFanInfo.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 30F));
+            this.tableLayoutPanelFanInfo.Size = new System.Drawing.Size(576, 132);
+            this.tableLayoutPanelFanInfo.TabIndex = 0;
             // 
             // labelFanInfoMotorPower
             // 
@@ -424,7 +433,7 @@
             // 
             // tabPageFanControlBasic
             // 
-            this.tabPageFanControlBasic.Controls.Add(this.tableLayoutPanel3);
+            this.tabPageFanControlBasic.Controls.Add(this.tableLayoutPanelBas);
             this.tabPageFanControlBasic.Location = new System.Drawing.Point(4, 33);
             this.tabPageFanControlBasic.Name = "tabPageFanControlBasic";
             this.tabPageFanControlBasic.Padding = new System.Windows.Forms.Padding(3);
@@ -433,23 +442,23 @@
             this.tabPageFanControlBasic.Text = "Basic";
             this.tabPageFanControlBasic.UseVisualStyleBackColor = true;
             // 
-            // tableLayoutPanel3
+            // tableLayoutPanelBas
             // 
-            this.tableLayoutPanel3.ColumnCount = 1;
-            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel3.Controls.Add(this.groupFanBasicSpeed, 0, 0);
-            this.tableLayoutPanel3.Controls.Add(this.groupFanBasicDirection, 0, 1);
-            this.tableLayoutPanel3.Location = new System.Drawing.Point(3, 3);
-            this.tableLayoutPanel3.Name = "tableLayoutPanel3";
-            this.tableLayoutPanel3.RowCount = 2;
-            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 37.21591F));
-            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 62.78409F));
-            this.tableLayoutPanel3.Size = new System.Drawing.Size(570, 352);
-            this.tableLayoutPanel3.TabIndex = 0;
+            this.tableLayoutPanelBas.ColumnCount = 1;
+            this.tableLayoutPanelBas.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanelBas.Controls.Add(this.groupFanBasicSpeed, 0, 0);
+            this.tableLayoutPanelBas.Controls.Add(this.groupFanBasicDirection, 0, 1);
+            this.tableLayoutPanelBas.Location = new System.Drawing.Point(3, 3);
+            this.tableLayoutPanelBas.Name = "tableLayoutPanelBas";
+            this.tableLayoutPanelBas.RowCount = 2;
+            this.tableLayoutPanelBas.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 37.21591F));
+            this.tableLayoutPanelBas.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 62.78409F));
+            this.tableLayoutPanelBas.Size = new System.Drawing.Size(570, 352);
+            this.tableLayoutPanelBas.TabIndex = 0;
             // 
             // groupFanBasicSpeed
             // 
-            this.groupFanBasicSpeed.Controls.Add(this.tableLayoutPanel4);
+            this.groupFanBasicSpeed.Controls.Add(this.tableLayoutPanelBasFanSpeed);
             this.groupFanBasicSpeed.Location = new System.Drawing.Point(3, 3);
             this.groupFanBasicSpeed.Name = "groupFanBasicSpeed";
             this.groupFanBasicSpeed.Size = new System.Drawing.Size(564, 97);
@@ -457,27 +466,27 @@
             this.groupFanBasicSpeed.TabStop = false;
             this.groupFanBasicSpeed.Text = "Fan Speed";
             // 
-            // tableLayoutPanel4
+            // tableLayoutPanelBasFanSpeed
             // 
-            this.tableLayoutPanel4.ColumnCount = 6;
-            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
-            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
-            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
-            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
-            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
-            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
-            this.tableLayoutPanel4.Controls.Add(this.radioButtonFanBasicSpeedTurbo, 5, 0);
-            this.tableLayoutPanel4.Controls.Add(this.radioButtonFanBasicSpeedHigh, 4, 0);
-            this.tableLayoutPanel4.Controls.Add(this.radioButtonFanBasicSpeed2, 3, 0);
-            this.tableLayoutPanel4.Controls.Add(this.radioButtonFanBasicSpeed1, 2, 0);
-            this.tableLayoutPanel4.Controls.Add(this.radioButtonFanBasicSpeedLow, 1, 0);
-            this.tableLayoutPanel4.Controls.Add(this.radioButtonFanBasicSpeedOff, 0, 0);
-            this.tableLayoutPanel4.Location = new System.Drawing.Point(0, 28);
-            this.tableLayoutPanel4.Name = "tableLayoutPanel4";
-            this.tableLayoutPanel4.RowCount = 1;
-            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel4.Size = new System.Drawing.Size(564, 61);
-            this.tableLayoutPanel4.TabIndex = 0;
+            this.tableLayoutPanelBasFanSpeed.ColumnCount = 6;
+            this.tableLayoutPanelBasFanSpeed.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
+            this.tableLayoutPanelBasFanSpeed.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
+            this.tableLayoutPanelBasFanSpeed.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
+            this.tableLayoutPanelBasFanSpeed.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
+            this.tableLayoutPanelBasFanSpeed.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
+            this.tableLayoutPanelBasFanSpeed.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
+            this.tableLayoutPanelBasFanSpeed.Controls.Add(this.radioButtonFanBasicSpeedTurbo, 5, 0);
+            this.tableLayoutPanelBasFanSpeed.Controls.Add(this.radioButtonFanBasicSpeedHigh, 4, 0);
+            this.tableLayoutPanelBasFanSpeed.Controls.Add(this.radioButtonFanBasicSpeed2, 3, 0);
+            this.tableLayoutPanelBasFanSpeed.Controls.Add(this.radioButtonFanBasicSpeed1, 2, 0);
+            this.tableLayoutPanelBasFanSpeed.Controls.Add(this.radioButtonFanBasicSpeedLow, 1, 0);
+            this.tableLayoutPanelBasFanSpeed.Controls.Add(this.radioButtonFanBasicSpeedOff, 0, 0);
+            this.tableLayoutPanelBasFanSpeed.Location = new System.Drawing.Point(0, 28);
+            this.tableLayoutPanelBasFanSpeed.Name = "tableLayoutPanelBasFanSpeed";
+            this.tableLayoutPanelBasFanSpeed.RowCount = 1;
+            this.tableLayoutPanelBasFanSpeed.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanelBasFanSpeed.Size = new System.Drawing.Size(564, 61);
+            this.tableLayoutPanelBasFanSpeed.TabIndex = 0;
             // 
             // radioButtonFanBasicSpeedTurbo
             // 
@@ -616,34 +625,34 @@
             // 
             // tabPageFanControlAdvanced
             // 
-            this.tabPageFanControlAdvanced.Controls.Add(this.tableLayoutPanel2);
-            this.tabPageFanControlAdvanced.Location = new System.Drawing.Point(4, 29);
+            this.tabPageFanControlAdvanced.Controls.Add(this.tableLayoutPanelFanAdv);
+            this.tabPageFanControlAdvanced.Location = new System.Drawing.Point(4, 33);
             this.tabPageFanControlAdvanced.Name = "tabPageFanControlAdvanced";
             this.tabPageFanControlAdvanced.Padding = new System.Windows.Forms.Padding(2, 3, 2, 3);
-            this.tabPageFanControlAdvanced.Size = new System.Drawing.Size(576, 362);
+            this.tabPageFanControlAdvanced.Size = new System.Drawing.Size(576, 358);
             this.tabPageFanControlAdvanced.TabIndex = 0;
             this.tabPageFanControlAdvanced.Text = "Advanced";
             this.tabPageFanControlAdvanced.UseVisualStyleBackColor = true;
             // 
-            // tableLayoutPanel2
+            // tableLayoutPanelFanAdv
             // 
-            this.tableLayoutPanel2.ColumnCount = 1;
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel2.Controls.Add(this.groupBoxFanControl, 0, 1);
-            this.tableLayoutPanel2.Controls.Add(this.groupBoxFanSpeed, 0, 0);
-            this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel2.Location = new System.Drawing.Point(2, 3);
-            this.tableLayoutPanel2.Name = "tableLayoutPanel2";
-            this.tableLayoutPanel2.RowCount = 2;
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 55.93221F));
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 44.06779F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(572, 356);
-            this.tableLayoutPanel2.TabIndex = 0;
+            this.tableLayoutPanelFanAdv.ColumnCount = 1;
+            this.tableLayoutPanelFanAdv.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanelFanAdv.Controls.Add(this.groupBoxFanControl, 0, 1);
+            this.tableLayoutPanelFanAdv.Controls.Add(this.groupBoxFanSpeed, 0, 0);
+            this.tableLayoutPanelFanAdv.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanelFanAdv.Location = new System.Drawing.Point(2, 3);
+            this.tableLayoutPanelFanAdv.Name = "tableLayoutPanelFanAdv";
+            this.tableLayoutPanelFanAdv.RowCount = 2;
+            this.tableLayoutPanelFanAdv.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 55.93221F));
+            this.tableLayoutPanelFanAdv.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 44.06779F));
+            this.tableLayoutPanelFanAdv.Size = new System.Drawing.Size(572, 352);
+            this.tableLayoutPanelFanAdv.TabIndex = 0;
             // 
             // groupBoxFanControl
             // 
             this.groupBoxFanControl.Controls.Add(this.tableLayoutPanelFanControl);
-            this.groupBoxFanControl.Location = new System.Drawing.Point(3, 202);
+            this.groupBoxFanControl.Location = new System.Drawing.Point(3, 199);
             this.groupBoxFanControl.Name = "groupBoxFanControl";
             this.groupBoxFanControl.Size = new System.Drawing.Size(566, 150);
             this.groupBoxFanControl.TabIndex = 10;
@@ -747,7 +756,7 @@
             // 
             // groupBoxFanSpeed
             // 
-            this.groupBoxFanSpeed.Controls.Add(this.tableLayoutPanelFanSpeed);
+            this.groupBoxFanSpeed.Controls.Add(this.tableLayoutPanelAdvFanSpeed);
             this.groupBoxFanSpeed.Location = new System.Drawing.Point(3, 3);
             this.groupBoxFanSpeed.Name = "groupBoxFanSpeed";
             this.groupBoxFanSpeed.Size = new System.Drawing.Size(566, 190);
@@ -755,37 +764,37 @@
             this.groupBoxFanSpeed.TabStop = false;
             this.groupBoxFanSpeed.Text = "Fan Speed";
             // 
-            // tableLayoutPanelFanSpeed
+            // tableLayoutPanelAdvFanSpeed
             // 
-            this.tableLayoutPanelFanSpeed.ColumnCount = 4;
-            this.tableLayoutPanelFanSpeed.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.tableLayoutPanelFanSpeed.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.tableLayoutPanelFanSpeed.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.tableLayoutPanelFanSpeed.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.tableLayoutPanelFanSpeed.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanelFanSpeed.Controls.Add(this.labelFanSpeedSet, 2, 2);
-            this.tableLayoutPanelFanSpeed.Controls.Add(this.trackBarFanSpeed, 0, 0);
-            this.tableLayoutPanelFanSpeed.Controls.Add(this.textBoxFanSpeedSet, 2, 3);
-            this.tableLayoutPanelFanSpeed.Controls.Add(this.textBoxFanSpeedSelected, 0, 3);
-            this.tableLayoutPanelFanSpeed.Controls.Add(this.labelFanSpeedTarget, 0, 2);
-            this.tableLayoutPanelFanSpeed.Controls.Add(this.buttonFanSpeedApply, 1, 2);
-            this.tableLayoutPanelFanSpeed.Controls.Add(this.labelFanSpeedCurrent, 3, 2);
-            this.tableLayoutPanelFanSpeed.Controls.Add(this.textBoxFanSpeedCurrent, 3, 3);
-            this.tableLayoutPanelFanSpeed.Controls.Add(this.buttonFanSpeedDecPlus, 0, 1);
-            this.tableLayoutPanelFanSpeed.Controls.Add(this.buttonFanSpeedDec, 1, 1);
-            this.tableLayoutPanelFanSpeed.Controls.Add(this.buttonFanSpeedInc, 2, 1);
-            this.tableLayoutPanelFanSpeed.Controls.Add(this.buttonFanSpeecIncPlus, 3, 1);
-            this.tableLayoutPanelFanSpeed.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanelFanSpeed.Location = new System.Drawing.Point(3, 25);
-            this.tableLayoutPanelFanSpeed.Name = "tableLayoutPanelFanSpeed";
-            this.tableLayoutPanelFanSpeed.RowCount = 4;
-            this.tableLayoutPanelFanSpeed.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 32.47863F));
-            this.tableLayoutPanelFanSpeed.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 42.73504F));
-            this.tableLayoutPanelFanSpeed.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 24.78633F));
-            this.tableLayoutPanelFanSpeed.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 33F));
-            this.tableLayoutPanelFanSpeed.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanelFanSpeed.Size = new System.Drawing.Size(560, 162);
-            this.tableLayoutPanelFanSpeed.TabIndex = 6;
+            this.tableLayoutPanelAdvFanSpeed.ColumnCount = 4;
+            this.tableLayoutPanelAdvFanSpeed.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tableLayoutPanelAdvFanSpeed.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tableLayoutPanelAdvFanSpeed.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tableLayoutPanelAdvFanSpeed.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tableLayoutPanelAdvFanSpeed.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanelAdvFanSpeed.Controls.Add(this.labelFanSpeedSet, 2, 2);
+            this.tableLayoutPanelAdvFanSpeed.Controls.Add(this.trackBarFanSpeed, 0, 0);
+            this.tableLayoutPanelAdvFanSpeed.Controls.Add(this.textBoxFanSpeedSet, 2, 3);
+            this.tableLayoutPanelAdvFanSpeed.Controls.Add(this.textBoxFanSpeedSelected, 0, 3);
+            this.tableLayoutPanelAdvFanSpeed.Controls.Add(this.labelFanSpeedTarget, 0, 2);
+            this.tableLayoutPanelAdvFanSpeed.Controls.Add(this.buttonFanSpeedApply, 1, 2);
+            this.tableLayoutPanelAdvFanSpeed.Controls.Add(this.labelFanSpeedCurrent, 3, 2);
+            this.tableLayoutPanelAdvFanSpeed.Controls.Add(this.textBoxFanSpeedCurrent, 3, 3);
+            this.tableLayoutPanelAdvFanSpeed.Controls.Add(this.buttonFanSpeedDecPlus, 0, 1);
+            this.tableLayoutPanelAdvFanSpeed.Controls.Add(this.buttonFanSpeedDec, 1, 1);
+            this.tableLayoutPanelAdvFanSpeed.Controls.Add(this.buttonFanSpeedInc, 2, 1);
+            this.tableLayoutPanelAdvFanSpeed.Controls.Add(this.buttonFanSpeecIncPlus, 3, 1);
+            this.tableLayoutPanelAdvFanSpeed.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanelAdvFanSpeed.Location = new System.Drawing.Point(3, 25);
+            this.tableLayoutPanelAdvFanSpeed.Name = "tableLayoutPanelAdvFanSpeed";
+            this.tableLayoutPanelAdvFanSpeed.RowCount = 4;
+            this.tableLayoutPanelAdvFanSpeed.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 32.47863F));
+            this.tableLayoutPanelAdvFanSpeed.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 42.73504F));
+            this.tableLayoutPanelAdvFanSpeed.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 24.78633F));
+            this.tableLayoutPanelAdvFanSpeed.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 33F));
+            this.tableLayoutPanelAdvFanSpeed.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanelAdvFanSpeed.Size = new System.Drawing.Size(560, 162);
+            this.tableLayoutPanelAdvFanSpeed.TabIndex = 6;
             // 
             // labelFanSpeedSet
             // 
@@ -807,7 +816,7 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.trackBarFanSpeed.BackColor = System.Drawing.SystemColors.Window;
-            this.tableLayoutPanelFanSpeed.SetColumnSpan(this.trackBarFanSpeed, 4);
+            this.tableLayoutPanelAdvFanSpeed.SetColumnSpan(this.trackBarFanSpeed, 4);
             this.trackBarFanSpeed.Location = new System.Drawing.Point(0, 0);
             this.trackBarFanSpeed.Margin = new System.Windows.Forms.Padding(0);
             this.trackBarFanSpeed.Maximum = 60;
@@ -859,7 +868,7 @@
             this.buttonFanSpeedApply.Enabled = false;
             this.buttonFanSpeedApply.Location = new System.Drawing.Point(143, 99);
             this.buttonFanSpeedApply.Name = "buttonFanSpeedApply";
-            this.tableLayoutPanelFanSpeed.SetRowSpan(this.buttonFanSpeedApply, 2);
+            this.tableLayoutPanelAdvFanSpeed.SetRowSpan(this.buttonFanSpeedApply, 2);
             this.buttonFanSpeedApply.Size = new System.Drawing.Size(134, 60);
             this.buttonFanSpeedApply.TabIndex = 6;
             this.buttonFanSpeedApply.Text = "Apply";
@@ -934,6 +943,7 @@
             // 
             // tabOverride
             // 
+            this.tabOverride.Controls.Add(this.tableLayoutPanelOverride);
             this.tabOverride.ImageIndex = 4;
             this.tabOverride.Location = new System.Drawing.Point(4, 33);
             this.tabOverride.Name = "tabOverride";
@@ -942,6 +952,79 @@
             this.tabOverride.TabIndex = 2;
             this.tabOverride.Text = "Manual Override";
             this.tabOverride.UseVisualStyleBackColor = true;
+            // 
+            // tableLayoutPanelOverride
+            // 
+            this.tableLayoutPanelOverride.ColumnCount = 1;
+            this.tableLayoutPanelOverride.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanelOverride.Controls.Add(this.groupBoxOverridePrivacySwitch, 0, 0);
+            this.tableLayoutPanelOverride.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanelOverride.Location = new System.Drawing.Point(3, 3);
+            this.tableLayoutPanelOverride.Name = "tableLayoutPanelOverride";
+            this.tableLayoutPanelOverride.RowCount = 3;
+            this.tableLayoutPanelOverride.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+            this.tableLayoutPanelOverride.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+            this.tableLayoutPanelOverride.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+            this.tableLayoutPanelOverride.Size = new System.Drawing.Size(586, 578);
+            this.tableLayoutPanelOverride.TabIndex = 0;
+            // 
+            // groupBoxOverridePrivacySwitch
+            // 
+            this.groupBoxOverridePrivacySwitch.Controls.Add(this.tableLayoutPanelOverridePrivacy);
+            this.groupBoxOverridePrivacySwitch.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.groupBoxOverridePrivacySwitch.Location = new System.Drawing.Point(3, 3);
+            this.groupBoxOverridePrivacySwitch.Name = "groupBoxOverridePrivacySwitch";
+            this.groupBoxOverridePrivacySwitch.Size = new System.Drawing.Size(580, 186);
+            this.groupBoxOverridePrivacySwitch.TabIndex = 0;
+            this.groupBoxOverridePrivacySwitch.TabStop = false;
+            this.groupBoxOverridePrivacySwitch.Text = "Privacy Switch";
+            // 
+            // tableLayoutPanelOverridePrivacy
+            // 
+            this.tableLayoutPanelOverridePrivacy.ColumnCount = 2;
+            this.tableLayoutPanelOverridePrivacy.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanelOverridePrivacy.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanelOverridePrivacy.Controls.Add(this.radioButtonOverridePrivacyOff, 1, 0);
+            this.tableLayoutPanelOverridePrivacy.Controls.Add(this.radioButtonOverridePrivacyOn, 0, 0);
+            this.tableLayoutPanelOverridePrivacy.Dock = System.Windows.Forms.DockStyle.Top;
+            this.tableLayoutPanelOverridePrivacy.Location = new System.Drawing.Point(3, 25);
+            this.tableLayoutPanelOverridePrivacy.Name = "tableLayoutPanelOverridePrivacy";
+            this.tableLayoutPanelOverridePrivacy.RowCount = 1;
+            this.tableLayoutPanelOverridePrivacy.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanelOverridePrivacy.Size = new System.Drawing.Size(574, 92);
+            this.tableLayoutPanelOverridePrivacy.TabIndex = 0;
+            // 
+            // radioButtonOverridePrivacyOff
+            // 
+            this.radioButtonOverridePrivacyOff.Appearance = System.Windows.Forms.Appearance.Button;
+            this.radioButtonOverridePrivacyOff.AutoSize = true;
+            this.radioButtonOverridePrivacyOff.CheckAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.radioButtonOverridePrivacyOff.Checked = true;
+            this.radioButtonOverridePrivacyOff.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.radioButtonOverridePrivacyOff.Location = new System.Drawing.Point(290, 3);
+            this.radioButtonOverridePrivacyOff.Name = "radioButtonOverridePrivacyOff";
+            this.radioButtonOverridePrivacyOff.Size = new System.Drawing.Size(281, 86);
+            this.radioButtonOverridePrivacyOff.TabIndex = 1;
+            this.radioButtonOverridePrivacyOff.TabStop = true;
+            this.radioButtonOverridePrivacyOff.Text = "Privacy Off";
+            this.radioButtonOverridePrivacyOff.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.radioButtonOverridePrivacyOff.UseVisualStyleBackColor = true;
+            this.radioButtonOverridePrivacyOff.Click += new System.EventHandler(this.radioButtonOverridePrivacy_Click);
+            // 
+            // radioButtonOverridePrivacyOn
+            // 
+            this.radioButtonOverridePrivacyOn.Appearance = System.Windows.Forms.Appearance.Button;
+            this.radioButtonOverridePrivacyOn.AutoSize = true;
+            this.radioButtonOverridePrivacyOn.CheckAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.radioButtonOverridePrivacyOn.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.radioButtonOverridePrivacyOn.Location = new System.Drawing.Point(3, 3);
+            this.radioButtonOverridePrivacyOn.Name = "radioButtonOverridePrivacyOn";
+            this.radioButtonOverridePrivacyOn.Size = new System.Drawing.Size(281, 86);
+            this.radioButtonOverridePrivacyOn.TabIndex = 0;
+            this.radioButtonOverridePrivacyOn.Text = "Privacy On";
+            this.radioButtonOverridePrivacyOn.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.radioButtonOverridePrivacyOn.UseVisualStyleBackColor = true;
+            this.radioButtonOverridePrivacyOn.Click += new System.EventHandler(this.radioButtonOverridePrivacy_Click);
             // 
             // tabInfo
             // 
@@ -978,13 +1061,12 @@
             this.diagnosticsTextBox.Location = new System.Drawing.Point(3, 3);
             this.diagnosticsTextBox.Multiline = true;
             this.diagnosticsTextBox.Name = "diagnosticsTextBox";
-            this.diagnosticsTextBox.OutputFile = null;
-            this.diagnosticsTextBox.OutputFileBackup = null;
             this.diagnosticsTextBox.ReadOnly = true;
             this.diagnosticsTextBox.RefreshInterval = 250;
             this.diagnosticsTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.diagnosticsTextBox.Size = new System.Drawing.Size(586, 578);
             this.diagnosticsTextBox.TabIndex = 0;
+            this.diagnosticsTextBox.Theme = CodeArtEng.Diagnostics.TextBoxTheme.UserDefined;
             this.diagnosticsTextBox.TimeStampFormat = "yyyy-MM-dd HH:mm:ss.fff";
             this.diagnosticsTextBox.WordWrap = false;
             // 
@@ -1025,26 +1107,31 @@
             this.tabFan.ResumeLayout(false);
             this.tableLayoutPanelFan.ResumeLayout(false);
             this.groupBoxFanInfo.ResumeLayout(false);
-            this.tableLayoutPanel1.ResumeLayout(false);
-            this.tableLayoutPanel1.PerformLayout();
+            this.tableLayoutPanelFanInfo.ResumeLayout(false);
+            this.tableLayoutPanelFanInfo.PerformLayout();
             this.tabControlFan.ResumeLayout(false);
             this.tabPageFanControlBasic.ResumeLayout(false);
-            this.tableLayoutPanel3.ResumeLayout(false);
+            this.tableLayoutPanelBas.ResumeLayout(false);
             this.groupFanBasicSpeed.ResumeLayout(false);
-            this.tableLayoutPanel4.ResumeLayout(false);
-            this.tableLayoutPanel4.PerformLayout();
+            this.tableLayoutPanelBasFanSpeed.ResumeLayout(false);
+            this.tableLayoutPanelBasFanSpeed.PerformLayout();
             this.groupFanBasicDirection.ResumeLayout(false);
             this.tableLayoutPanelFanBasicDirection.ResumeLayout(false);
             this.tabPageFanControlAdvanced.ResumeLayout(false);
-            this.tableLayoutPanel2.ResumeLayout(false);
+            this.tableLayoutPanelFanAdv.ResumeLayout(false);
             this.groupBoxFanControl.ResumeLayout(false);
             this.tableLayoutPanelFanControl.ResumeLayout(false);
             this.tableLayoutPanelFanControl.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxFanControlActivity)).EndInit();
             this.groupBoxFanSpeed.ResumeLayout(false);
-            this.tableLayoutPanelFanSpeed.ResumeLayout(false);
-            this.tableLayoutPanelFanSpeed.PerformLayout();
+            this.tableLayoutPanelAdvFanSpeed.ResumeLayout(false);
+            this.tableLayoutPanelAdvFanSpeed.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarFanSpeed)).EndInit();
+            this.tabOverride.ResumeLayout(false);
+            this.tableLayoutPanelOverride.ResumeLayout(false);
+            this.groupBoxOverridePrivacySwitch.ResumeLayout(false);
+            this.tableLayoutPanelOverridePrivacy.ResumeLayout(false);
+            this.tableLayoutPanelOverridePrivacy.PerformLayout();
             this.tabLog.ResumeLayout(false);
             this.tabLog.PerformLayout();
             this.ResumeLayout(false);
@@ -1064,7 +1151,7 @@
         private CodeArtEng.Diagnostics.Controls.DiagnosticsTextBox diagnosticsTextBox;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanelFan;
         private System.Windows.Forms.GroupBox groupBoxFanInfo;
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanelFanInfo;
         private System.Windows.Forms.Label labelFanInfoMotorPower;
         private System.Windows.Forms.Label labelFanInfoMotorVoltage;
         private System.Windows.Forms.Label labelFanInfoMotorCurrent;
@@ -1081,7 +1168,7 @@
         private System.Windows.Forms.TabControl tabControlFan;
         private System.Windows.Forms.TabPage tabPageFanControlBasic;
         private System.Windows.Forms.TabPage tabPageFanControlAdvanced;
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanelFanAdv;
         private System.Windows.Forms.GroupBox groupBoxFanControl;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanelFanControl;
         private System.Windows.Forms.Label labelFanControlFault;
@@ -1091,7 +1178,7 @@
         private System.Windows.Forms.Label labelFanControlActivity;
         private System.Windows.Forms.PictureBox pictureBoxFanControlActivity;
         private System.Windows.Forms.GroupBox groupBoxFanSpeed;
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanelFanSpeed;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanelAdvFanSpeed;
         private System.Windows.Forms.Label labelFanSpeedSet;
         private System.Windows.Forms.TrackBar trackBarFanSpeed;
         private System.Windows.Forms.TextBox textBoxFanSpeedSet;
@@ -1104,9 +1191,9 @@
         private System.Windows.Forms.Button buttonFanSpeedDec;
         private System.Windows.Forms.Button buttonFanSpeedInc;
         private System.Windows.Forms.Button buttonFanSpeecIncPlus;
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel3;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanelBas;
         private System.Windows.Forms.GroupBox groupFanBasicSpeed;
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel4;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanelBasFanSpeed;
         private System.Windows.Forms.RadioButton radioButtonFanBasicSpeedTurbo;
         private System.Windows.Forms.RadioButton radioButtonFanBasicSpeedHigh;
         private System.Windows.Forms.RadioButton radioButtonFanBasicSpeed2;
@@ -1117,6 +1204,11 @@
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanelFanBasicDirection;
         private System.Windows.Forms.RadioButton radioButtonFanBasicDirectionReverse;
         private System.Windows.Forms.RadioButton radioButtonFanBasicDirectionForward;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanelOverride;
+        private System.Windows.Forms.GroupBox groupBoxOverridePrivacySwitch;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanelOverridePrivacy;
+        private System.Windows.Forms.RadioButton radioButtonOverridePrivacyOff;
+        private System.Windows.Forms.RadioButton radioButtonOverridePrivacyOn;
     }
 }
 
