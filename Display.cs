@@ -43,9 +43,7 @@ namespace HAL_Display
 
         public class Checkup
         {
-            public string d_fanCmdOn;
-            public string d_fanCmdSpd;
-            public string Private_Switch;
+            public string Privacy_Switch;
         }
         Checkup checkup;
 
@@ -62,19 +60,40 @@ namespace HAL_Display
 
         public Display()
         {
-            const string jsonFile = @"HAL_Display.json";
+            string appPath = Path.GetDirectoryName(Application.ExecutablePath);
+            string jsonFile = @"HAL_Display.json";
             Debug.WriteLine("Initializing Display.");
             var jsonSerializer = new JsonSerializer();
-            var sw = new StreamReader(jsonFile);
-            var reader = new JsonTextReader(sw);
-            config = jsonSerializer.Deserialize<Config>(reader);
-            sw.Close();
+            Debug.WriteLine(">> Trying file in current working directory: " + jsonFile);
+            StreamReader sw;
+            if (File.Exists(jsonFile))
+            {
+                sw = new StreamReader(jsonFile);
+                var reader = new JsonTextReader(sw);
+                config = jsonSerializer.Deserialize<Config>(reader);
+                sw.Close();
+            }
+            else
+            {
+                jsonFile = appPath + Path.DirectorySeparatorChar + jsonFile;
+                Debug.WriteLine("!  File not found  Trying application directory: " + jsonFile);
+                 if (File.Exists(jsonFile))
+                {
+                    sw = new StreamReader(jsonFile);
+                    var reader = new JsonTextReader(sw);
+                    config = jsonSerializer.Deserialize<Config>(reader);
+                    sw.Close();
+                }
+                else
+                {
+                    Close();
+                }
+            }
+
 
             checkup = new Checkup();
 
-            checkup.d_fanCmdOn = "0";
-            checkup.d_fanCmdSpd = "600";
-            checkup.Private_Switch = "0";
+            checkup.Privacy_Switch = "0";
 
             InitializeComponent();
             // even though it is set to allow word wrap through the designer,
@@ -187,7 +206,7 @@ namespace HAL_Display
             // enable controls and validate data
         }
 
-        private void OnSubscriberMessageReceived(MqttApplicationMessageReceivedEventArgs obj)
+        async private void OnSubscriberMessageReceived(MqttApplicationMessageReceivedEventArgs obj)
         {
             if (obj.ApplicationMessage.Topic.StartsWith("fan/"))
             {
@@ -211,7 +230,12 @@ namespace HAL_Display
                 Debug.WriteLine(">> Checkup Request Received");
                 if (config.main_display)
                 {
-                    String message = JsonConvert.SerializeObject(checkup);
+                    String jsonMessage = JsonConvert.SerializeObject(checkup);
+                    var m_message = new MqttApplicationMessageBuilder()
+                        .WithTopic("display/checkup")
+                        .WithPayload(jsonMessage)
+                        .Build();
+                    await this.mqttClient.PublishAsync(m_message);
                 }
             }
             else if (obj.ApplicationMessage.Topic.StartsWith("display/"))
@@ -259,11 +283,13 @@ namespace HAL_Display
             {
                 jsonMessage.Append("\"Privacy_Switch\":\"1\"");
                 privacy_value = '1';
+                checkup.Privacy_Switch = "1";
             }
             else
             {
                 jsonMessage.Append("\"Privacy_Switch\":\"0\"");
                 privacy_value = '0';
+                checkup.Privacy_Switch = "0";
             }
             jsonMessage.Append("}");
             var message = new MqttApplicationMessageBuilder()

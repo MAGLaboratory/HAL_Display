@@ -304,7 +304,7 @@ namespace HAL_Display
                 .Build();
             await this.mqttClient.PublishAsync(message);
             Debug.WriteLine(">> Fan Speed Application: " + this.textBoxFanSpeedSelected.Text + "0");
-            checkup.d_fanCmdSpd = this.textBoxFanSpeedSelected.Text + "0";
+            //checkup.d_fanCmdSpd = this.textBoxFanSpeedSelected.Text + "0";
         }
 
         private async void buttonFanControlReset_Click(object sender, EventArgs e)
@@ -459,12 +459,12 @@ namespace HAL_Display
                 if (v != 0)
                 {
                     checkBoxFanControlOnOff.Checked = true;
-                    checkup.d_fanCmdOn = "1";
+                    //checkup.d_fanCmdOn = "1";
                 }
                 else
                 {
                     checkBoxFanControlOnOff.Checked = false;
-                    checkup.d_fanCmdOn = "0";
+                    //checkup.d_fanCmdOn = "0";
                 }
             }
         }
