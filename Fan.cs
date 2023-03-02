@@ -80,6 +80,9 @@ namespace HAL_Display
 
         private void FanHandler(MqttApplicationMessageReceivedEventArgs obj)
         {
+            string message_payload = obj.ApplicationMessage.ConvertPayloadToString();
+            if (message_payload == null)
+                return;
             dynamic received = JsonConvert.DeserializeObject(obj.ApplicationMessage.ConvertPayloadToString());
 
             // get time
