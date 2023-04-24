@@ -45,6 +45,7 @@ namespace HAL_Display
             // last receive values
             public Dictionary<string, string> last;
 
+            // fan speeds
             public int fsLow   = 25;
             public int fs1     = 35;
             public int fs2     = 42;
@@ -78,22 +79,23 @@ namespace HAL_Display
             }
         }
 
-        private void FanHandler(MqttApplicationMessageReceivedEventArgs obj)
+        private void FanMQTTHandler(MqttApplicationMessageReceivedEventArgs obj)
         {
             string message_payload = obj.ApplicationMessage.ConvertPayloadToString();
             if (message_payload == null)
                 return;
-            dynamic received = JsonConvert.DeserializeObject(obj.ApplicationMessage.ConvertPayloadToString());
+            dynamic rcvData = JsonConvert.DeserializeObject(obj.ApplicationMessage.ConvertPayloadToString());
 
-            // get time
-            int dot_position = ((string)received.time).IndexOf(".");
-            int update_time = int.Parse(((string)received.time).Substring(0, dot_position));
-            foreach (dynamic entry in received)
+            // get time in seconds only
+            int dot_position = ((string)rcvData.time).IndexOf(".");
+            int update_time = int.Parse(((string)rcvData.time).Substring(0, dot_position));
+            foreach (dynamic entry in rcvData)
             {
                 string key = entry.Name;
                 string value = entry.Value;
 
                 // TODO: error handling
+                // process integer values
                 if (this.fan.fanData.ContainsKey(key) && this.fan.fanData[key].str == null)
                 {
                     int parsed_value;
@@ -112,6 +114,7 @@ namespace HAL_Display
                     this.fan.fanData[key].val = parsed_value;
                     this.fan.fanData[key].last_update = update_time;
 
+                    // items with no scaling factor or special handling
                     if (this.fan.boxes.ContainsKey(key))
                     {
                         this.fan.boxes[key].Invoke(new MethodInvoker(delegate { this.fan.boxes[key].Text = value; }));
@@ -119,15 +122,24 @@ namespace HAL_Display
 
                     if (key == "Max_Speed")
                     {
+                        // update fan on first maximum speed reception or maximum speed update
                         if (!this.fan.last.ContainsKey(key) || value != this.fan.last[key])
                         {
                             this.trackBarFanSpeed.Invoke(new MethodInvoker(delegate
                             {
+                                // the maximum speed is given in tenths
+                                // the trackBar values are only valid in positive integers
+
+                                // the target frequency (decimal) is calculated
                                 int v = this.trackBarFanSpeed.Value;
                                 v -= this.trackBarFanSpeed.Maximum / 2;
                                 int target = v * 2;
+
+                                // the scaled and offset trackbar value is calculated
                                 v += parsed_value / 20;
-                                // change values if necessary
+
+                                // reset target speed and set the speed to 0 if the
+                                // original speed was greater than the maximum speed
                                 if (v <= parsed_value / 10)
                                 {
                                     this.trackBarFanSpeed.Maximum = parsed_value / 10;

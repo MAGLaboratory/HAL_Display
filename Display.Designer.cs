@@ -100,6 +100,7 @@
             this.tabLog = new System.Windows.Forms.TabPage();
             this.diagnosticsTextBox = new CodeArtEng.Diagnostics.Controls.DiagnosticsTextBox();
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
+            this.updateTimer = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -626,10 +627,10 @@
             // tabPageFanControlAdvanced
             // 
             this.tabPageFanControlAdvanced.Controls.Add(this.tableLayoutPanelFanAdv);
-            this.tabPageFanControlAdvanced.Location = new System.Drawing.Point(4, 33);
+            this.tabPageFanControlAdvanced.Location = new System.Drawing.Point(4, 22);
             this.tabPageFanControlAdvanced.Name = "tabPageFanControlAdvanced";
             this.tabPageFanControlAdvanced.Padding = new System.Windows.Forms.Padding(2, 3, 2, 3);
-            this.tabPageFanControlAdvanced.Size = new System.Drawing.Size(576, 358);
+            this.tabPageFanControlAdvanced.Size = new System.Drawing.Size(576, 369);
             this.tabPageFanControlAdvanced.TabIndex = 0;
             this.tabPageFanControlAdvanced.Text = "Advanced";
             this.tabPageFanControlAdvanced.UseVisualStyleBackColor = true;
@@ -646,13 +647,13 @@
             this.tableLayoutPanelFanAdv.RowCount = 2;
             this.tableLayoutPanelFanAdv.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 55.93221F));
             this.tableLayoutPanelFanAdv.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 44.06779F));
-            this.tableLayoutPanelFanAdv.Size = new System.Drawing.Size(572, 352);
+            this.tableLayoutPanelFanAdv.Size = new System.Drawing.Size(572, 363);
             this.tableLayoutPanelFanAdv.TabIndex = 0;
             // 
             // groupBoxFanControl
             // 
             this.groupBoxFanControl.Controls.Add(this.tableLayoutPanelFanControl);
-            this.groupBoxFanControl.Location = new System.Drawing.Point(3, 199);
+            this.groupBoxFanControl.Location = new System.Drawing.Point(3, 206);
             this.groupBoxFanControl.Name = "groupBoxFanControl";
             this.groupBoxFanControl.Size = new System.Drawing.Size(566, 150);
             this.groupBoxFanControl.TabIndex = 10;
@@ -1061,12 +1062,13 @@
             this.diagnosticsTextBox.Location = new System.Drawing.Point(3, 3);
             this.diagnosticsTextBox.Multiline = true;
             this.diagnosticsTextBox.Name = "diagnosticsTextBox";
+            this.diagnosticsTextBox.OutputFile = null;
+            this.diagnosticsTextBox.OutputFileBackup = null;
             this.diagnosticsTextBox.ReadOnly = true;
             this.diagnosticsTextBox.RefreshInterval = 250;
             this.diagnosticsTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.diagnosticsTextBox.Size = new System.Drawing.Size(586, 578);
             this.diagnosticsTextBox.TabIndex = 0;
-            this.diagnosticsTextBox.Theme = CodeArtEng.Diagnostics.TextBoxTheme.UserDefined;
             this.diagnosticsTextBox.TimeStampFormat = "yyyy-MM-dd HH:mm:ss.fff";
             this.diagnosticsTextBox.WordWrap = false;
             // 
@@ -1080,6 +1082,12 @@
             this.imageList1.Images.SetKeyName(3, "log.ico");
             this.imageList1.Images.SetKeyName(4, "manual.ico");
             this.imageList1.Images.SetKeyName(5, "fan3.ico");
+            // 
+            // updateTimer
+            // 
+            this.updateTimer.Enabled = true;
+            this.updateTimer.Interval = 250;
+            this.updateTimer.Tick += new System.EventHandler(this.updateTimer_Tick);
             // 
             // Display
             // 
@@ -1209,6 +1217,7 @@
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanelOverridePrivacy;
         private System.Windows.Forms.RadioButton radioButtonOverridePrivacyOff;
         private System.Windows.Forms.RadioButton radioButtonOverridePrivacyOn;
+        private System.Windows.Forms.Timer updateTimer;
     }
 }
 

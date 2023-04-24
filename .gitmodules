@@ -1,0 +1,3 @@
+[submodule "MAGLabCL"]
+	path = MAGLabCL
+	url = https://github.com/MAGLaboratory/MAGLabCL.git

@@ -210,7 +210,7 @@ namespace HAL_Display
         {
             if (obj.ApplicationMessage.Topic.StartsWith("fan/"))
             {
-                FanHandler(obj);
+                FanMQTTHandler(obj);
                 SynopticHandler(obj);
             }
             else if (obj.ApplicationMessage.Topic.StartsWith("tweeter/"))
@@ -305,6 +305,11 @@ namespace HAL_Display
         {
             await this.mqttClient.StopAsync();
             this.mqttClient = null;
+        }
+
+        private void updateTimer_Tick(object sender, EventArgs e)
+        {
+            // TODO: slowly move things into this function
         }
     }
 }
