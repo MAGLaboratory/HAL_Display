@@ -153,7 +153,6 @@ namespace HAL_Display
             string[] subscribeTopics = new string[]
             {
                 "reporter/+",
-                "tweeter/+",
                 "haldor/+",
                 "daisy/+",
                 "fan/+"
@@ -211,19 +210,15 @@ namespace HAL_Display
             if (obj.ApplicationMessage.Topic.StartsWith("fan/"))
             {
                 FanMQTTHandler(obj);
-                SynopticHandler(obj);
-            }
-            else if (obj.ApplicationMessage.Topic.StartsWith("tweeter/"))
-            {
-                SynopticHandler(obj);
+                SynopticMQTTHandler(obj);
             }
             else if (obj.ApplicationMessage.Topic.StartsWith("haldor/"))
             {
-                SynopticHandler(obj);
+                SynopticMQTTHandler(obj);
             }
             else if (obj.ApplicationMessage.Topic.StartsWith("daisy/"))
             {
-                SynopticHandler(obj);
+                SynopticMQTTHandler(obj);
             }
             else if (obj.ApplicationMessage.Topic == "reporter/checkup_req")
             {
@@ -310,6 +305,7 @@ namespace HAL_Display
         private void updateTimer_Tick(object sender, EventArgs e)
         {
             // TODO: slowly move things into this function
+            SynopticTimerHandler();
         }
     }
 }

@@ -5,11 +5,13 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Windows.Forms;
+using MAGLabCL;
 
 namespace HAL_Display
 {
 	public partial class Display
 	{
+        UInt16 time = 0;
         class SynopticData
         {
             public Dictionary<string, string> therm;
@@ -19,6 +21,21 @@ namespace HAL_Display
             public Dictionary<string, bool> motion;
             public string Space_Message;
             public bool Space_Open;
+            public class OpenSwitch
+            {
+                public enum OpenStatus
+                {
+                    eUnknown = -1,
+                    eFalse = 0,
+                    eTrue = 1
+                };
+                public OpenStatus raw;
+                public bool updated;
+                public Timeout timeout;
+                public ConfirmationThreshold<OpenStatus> confirmation_threshold;
+            } 
+            
+            public OpenSwitch openswitch;
 
             public SynopticData()
             {
@@ -35,8 +52,7 @@ namespace HAL_Display
                 {
                     {"daisy", true },
                     {"haldor", true },
-                    {"fan", true },
-                    {"tweeter", true }
+                    {"fan", true }
                 };
 
                 this.door = new Dictionary<string, bool>
@@ -56,6 +72,18 @@ namespace HAL_Display
 
                 this.Space_Message = "is UNKNOWN";
                 this.Space_Open = false;
+
+                this.openswitch = new OpenSwitch
+                {
+                    raw = OpenSwitch.OpenStatus.eUnknown,
+                    updated = false,
+                    timeout = new Timeout(10 * 60 * 4),
+                    confirmation_threshold = new ConfirmationThreshold<OpenSwitch.OpenStatus>(
+                        OpenSwitch.OpenStatus.eUnknown, 
+                        15 * 60 * 4,
+                        3
+                    )
+                };
             }
         }
 
@@ -84,15 +112,9 @@ namespace HAL_Display
 
         pens Pens = new pens();
 
-        private void SynopticHandler(MqttApplicationMessageReceivedEventArgs obj)
+        private void SynopticMQTTHandler(MqttApplicationMessageReceivedEventArgs obj)
         {
             bool updated = false;
-            if (obj.ApplicationMessage.Topic.StartsWith("tweeter/"))
-            {
-                this.synopticData.daemon["tweeter"] = false;
-                this.synopticData.Space_Message = obj.ApplicationMessage.ConvertPayloadToString();
-                return;
-            }
 
             if (obj.ApplicationMessage.Topic.StartsWith("haldor/"))
             {
@@ -195,11 +217,67 @@ namespace HAL_Display
                         updated = true;
                     }
                 }
+                if (key == "Open_Switch")
+                {
+                    int parsed_value;
+                    if (value.ToLower() == "true")
+                    {
+                        parsed_value = 1;
+                    }
+                    else if (value.ToLower() == "false")
+                    {
+                        parsed_value = 0;
+                    }
+                    else
+                    {
+                        parsed_value = int.Parse(value);
+                    }
+                    this.synopticData.openswitch.raw = (SynopticData.OpenSwitch.OpenStatus)parsed_value;
+                    this.synopticData.openswitch.updated = true;
+                }
             }
 
             if (updated)
             {
                 this.synopticPanel.Invoke(new MethodInvoker(delegate { this.synopticPanel.Refresh(); }));
+            }
+        }
+
+        void SynopticTimerHandler()
+        {
+            time += 1;
+            SynopticData.OpenSwitch.OpenStatus switch_status = SynopticData.OpenSwitch.OpenStatus.eUnknown;
+            SynopticData.OpenSwitch.OpenStatus confirmed_status = SynopticData.OpenSwitch.OpenStatus.eUnknown;
+            bool timed_out = synopticData.openswitch.timeout.update(synopticData.openswitch.updated, time);
+            if (!timed_out)
+            {
+                switch_status = synopticData.openswitch.raw;
+            }
+            confirmed_status = synopticData.openswitch.confirmation_threshold.update(synopticData.openswitch.updated, switch_status, time);
+            synopticData.openswitch.updated = false;
+
+            if (switch_status == SynopticData.OpenSwitch.OpenStatus.eUnknown)
+            {
+                synopticData.Space_Open = false;
+                synopticData.Space_Message = "is UNKNOWN.";
+            }
+            else
+            {
+                if (confirmed_status == SynopticData.OpenSwitch.OpenStatus.eTrue)
+                {
+                    synopticData.Space_Open = true;
+                    synopticData.Space_Message = "is OPEN.";
+                }
+                else
+                {
+                    synopticData.Space_Open = false;
+                    synopticData.Space_Message = "is CLOSED.";
+                }
+            }
+
+            if (synopticData.openswitch.updated)
+            {
+                synopticPanel.Refresh();
             }
         }
 
