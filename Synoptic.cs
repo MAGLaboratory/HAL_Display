@@ -246,32 +246,47 @@ namespace HAL_Display
         void SynopticTimerHandler()
         {
             time += 1;
-            SynopticData.OpenSwitch.OpenStatus switch_status = SynopticData.OpenSwitch.OpenStatus.eUnknown;
+            // default the switch status to "unknown"
+            SynopticData.OpenSwitch.OpenStatus timeout_status = SynopticData.OpenSwitch.OpenStatus.eUnknown;
             SynopticData.OpenSwitch.OpenStatus confirmed_status = SynopticData.OpenSwitch.OpenStatus.eUnknown;
             bool timed_out = synopticData.openswitch.timeout.update(synopticData.openswitch.updated, time);
+            // if it timed out, keep the open switch status as unknown
             if (!timed_out)
             {
-                switch_status = synopticData.openswitch.raw;
+                timeout_status = synopticData.openswitch.raw;
             }
-            confirmed_status = synopticData.openswitch.confirmation_threshold.update(synopticData.openswitch.updated, switch_status, time);
+            confirmed_status = synopticData.openswitch.confirmation_threshold.update(synopticData.openswitch.updated, timeout_status, time);
             synopticData.openswitch.updated = false;
 
-            if (switch_status == SynopticData.OpenSwitch.OpenStatus.eUnknown)
+            // if the space is unknown (timed out)
+            if (timeout_status == SynopticData.OpenSwitch.OpenStatus.eUnknown)
             {
                 synopticData.Space_Open = false;
                 synopticData.Space_Message = "is UNKNOWN.";
             }
             else
             {
+                // if it did not time out
                 if (confirmed_status == SynopticData.OpenSwitch.OpenStatus.eTrue)
                 {
+                    // reset the privacy switch on space open
+                    if (synopticData.Space_Open == false)
+                    {
+                        radioButtonOverridePrivacyOff.Checked = true;
+                    }
                     synopticData.Space_Open = true;
                     synopticData.Space_Message = "is OPEN.";
                 }
-                else
+                else if (confirmed_status == SynopticData.OpenSwitch.OpenStatus.eFalse)
                 {
                     synopticData.Space_Open = false;
                     synopticData.Space_Message = "is CLOSED.";
+                }
+                // not sure how we get to here (bad data?)
+                else
+                {
+                    synopticData.Space_Open = false;
+                    synopticData.Space_Message = "is UNKNOWN.";
                 }
             }
 
