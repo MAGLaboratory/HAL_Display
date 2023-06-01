@@ -270,7 +270,7 @@ namespace HAL_Display
             }
         }
 
-        private async void radioButtonOverridePrivacy_Click(object sender, EventArgs e)
+        private async void radioButtonOverridePrivacy_Changed(object sender, EventArgs e)
         {
             StringBuilder jsonMessage = new StringBuilder("{");
             char privacy_value = '0';
