@@ -1010,7 +1010,6 @@
             this.radioButtonOverridePrivacyOff.Text = "Privacy Off";
             this.radioButtonOverridePrivacyOff.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.radioButtonOverridePrivacyOff.UseVisualStyleBackColor = true;
-            this.radioButtonOverridePrivacyOff.Click += new System.EventHandler(this.radioButtonOverridePrivacy_Changed);
             // 
             // radioButtonOverridePrivacyOn
             // 
@@ -1062,12 +1061,13 @@
             this.diagnosticsTextBox.Location = new System.Drawing.Point(3, 3);
             this.diagnosticsTextBox.Multiline = true;
             this.diagnosticsTextBox.Name = "diagnosticsTextBox";
+            this.diagnosticsTextBox.OutputFile = null;
+            this.diagnosticsTextBox.OutputFileBackup = null;
             this.diagnosticsTextBox.ReadOnly = true;
             this.diagnosticsTextBox.RefreshInterval = 250;
             this.diagnosticsTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.diagnosticsTextBox.Size = new System.Drawing.Size(586, 578);
             this.diagnosticsTextBox.TabIndex = 0;
-            this.diagnosticsTextBox.Theme = CodeArtEng.Diagnostics.TextBoxTheme.UserDefined;
             this.diagnosticsTextBox.TimeStampFormat = "yyyy-MM-dd HH:mm:ss.fff";
             this.diagnosticsTextBox.WordWrap = false;
             // 
